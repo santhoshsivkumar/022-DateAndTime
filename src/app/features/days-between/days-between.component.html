@@ -1,0 +1,26 @@
+<div class="container mx-auto p-4">
+    <h2 class="text-2xl font-bold mb-4">Days Between Dates</h2>
+    <div class="mb-4">
+      <label class="block mb-2">Start Date:</label>
+      <input
+        type="date"
+        [(ngModel)]="startDate"
+        class="border border-gray-300 p-2 rounded w-full">
+    </div>
+    <div class="mb-4">
+      <label class="block mb-2">End Date:</label>
+      <input
+        type="date"
+        [(ngModel)]="endDate"
+        class="border border-gray-300 p-2 rounded w-full">
+    </div>
+    <button
+      (click)="calculateDaysBetween()"
+      class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+      Calculate Days
+    </button>
+    <div *ngIf="daysBetween !== null" class="mt-4">
+      <p>There are {{ daysBetween }} days between the selected dates.</p>
+    </div>
+  </div>
+  
