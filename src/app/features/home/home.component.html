@@ -1,9 +1,14 @@
-<div class="container mx-auto p-4">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <app-feature-card
-      *ngFor="let feature of features"
-      [title]="feature.title"
-      [route]="feature.route">
-    </app-feature-card>
-  </div>
+<div class="container mx-auto p-4 space-y-10">
+  <ng-container *ngFor="let section of groupedFeatures | keyvalue">
+    <section>
+      <h2 class="text-2xl font-bold mb-4" [style.color]="'var(--font-color)'">
+        {{ section.key }}
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <app-feature-card *ngFor="let feature of section.value" [title]="feature.title" [route]="feature.route"
+          class="h-24 w-full">
+        </app-feature-card>
+      </div>
+    </section>
+  </ng-container>
 </div>

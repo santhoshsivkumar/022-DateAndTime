@@ -9,7 +9,7 @@
 :root {
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  
+
   /*========== Colors ==========*/
   --hue: 0;
   --sat: 0%;
@@ -81,34 +81,36 @@
   box-sizing: border-box;
 }
 
-html,body {
-  background-color: var(--background-color);
+html,
+body {
+  background-color: #f4f4f9;
   color: var(--text-color);
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: var(--title-color);
   font-weight: var(--font-semi-bold);
 }
 
-button {
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background-color: var(--title-color);
-  color: var(--container-color);
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  font-weight: var(--font-medium);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-button:hover {
-  background-color: var(--title-color-dark);
-}
-
-h2, h3 {
+h2,
+h3 {
   transition: color 0.3s ease;
+}
+
+/* common template for all */
+/* Common Styles */
+h2,
+h3 {
+  color: var(--font-color);
+}
+
+input {
+  border: 2px solid #ddd;
+  padding: 10px;
+  margin-top: 5px;
+  font-size: 16px;
 }

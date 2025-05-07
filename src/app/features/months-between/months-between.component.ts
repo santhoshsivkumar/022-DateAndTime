@@ -1,24 +1,24 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-days-between',
+  selector: 'app-months-between',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './days-between.component.html',
-  styleUrls: ['./days-between.component.css'],
+  imports: [FormsModule, CommonModule],
+  templateUrl: './months-between.component.html',
+  styleUrls: ['./months-between.component.css'],
 })
-export class DaysBetweenComponent {
+export class MonthsBetweenComponent {
   startDate: string = '';
   endDate: string = '';
-  daysBetween: number | null = null;
+  monthsBetween: number | null = null;
   errorMessage: string | null = null;
   isLoading: boolean = false;
 
-  calculateDaysBetween() {
+  calculateMonthsBetween() {
     this.errorMessage = null;
-    this.daysBetween = null;
+    this.monthsBetween = null;
     this.isLoading = true;
 
     if (!this.startDate || !this.endDate) {
@@ -30,8 +30,9 @@ export class DaysBetweenComponent {
 
     const start = new Date(this.startDate);
     const end = new Date(this.endDate);
-    const timeDiff = Math.abs(end.getTime() - start.getTime());
-    this.daysBetween = Math.floor(timeDiff / (1000 * 3600 * 24));
+    const yearsDiff = end.getFullYear() - start.getFullYear();
+    const monthsDiff = end.getMonth() - start.getMonth();
+    this.monthsBetween = yearsDiff * 12 + monthsDiff;
 
     this.isLoading = false;
   }

@@ -1,24 +1,24 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-days-between',
+  selector: 'app-weeks-between',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './days-between.component.html',
-  styleUrls: ['./days-between.component.css'],
+  imports: [FormsModule, CommonModule],
+  templateUrl: './weeks-between.component.html',
+  styleUrls: ['./weeks-between.component.css'],
 })
-export class DaysBetweenComponent {
+export class WeeksBetweenComponent {
   startDate: string = '';
   endDate: string = '';
-  daysBetween: number | null = null;
+  weeksBetween: number | null = null;
   errorMessage: string | null = null;
   isLoading: boolean = false;
 
-  calculateDaysBetween() {
+  calculateWeeksBetween() {
     this.errorMessage = null;
-    this.daysBetween = null;
+    this.weeksBetween = null;
     this.isLoading = true;
 
     if (!this.startDate || !this.endDate) {
@@ -31,7 +31,7 @@ export class DaysBetweenComponent {
     const start = new Date(this.startDate);
     const end = new Date(this.endDate);
     const timeDiff = Math.abs(end.getTime() - start.getTime());
-    this.daysBetween = Math.floor(timeDiff / (1000 * 3600 * 24));
+    this.weeksBetween = Math.floor(timeDiff / (1000 * 3600 * 24 * 7));
 
     this.isLoading = false;
   }

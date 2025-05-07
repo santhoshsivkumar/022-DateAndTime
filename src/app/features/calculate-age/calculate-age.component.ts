@@ -1,81 +1,69 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Add this import
-import { GoBackComponent } from '../../shared/go-back/go-back.component';
+
 @Component({
-  selector: 'app-calculate-age',
+  selector: 'app-age-calculator',
   standalone: true,
-  imports: [CommonModule, FormsModule,GoBackComponent], // Add FormsModule and CommonModule here
+  imports: [FormsModule, CommonModule],
   templateUrl: './calculate-age.component.html',
-  styleUrls: ['./calculate-age.component.css']
+  styleUrls: ['./calculate-age.component.css'],
 })
 export class CalculateAgeComponent {
   birthDate: string = '';
+  errorMessage: string | null = null;
   ageDetails: any = null;
-  errorMessage: string = '';
+  isLoading: boolean = false;
 
   calculateAge() {
-    if (!this.birthDate) {
-      this.errorMessage = 'Please enter a valid birth date.';
-      this.ageDetails = null;
-      return;
-    }
+    this.errorMessage = null;
+    this.ageDetails = null;
 
-    const currentDate = new Date();
+    const today = new Date();
     const birthDate = new Date(this.birthDate);
+    const ageInMillis = today.getTime() - birthDate.getTime();
 
-    if (birthDate > currentDate) {
-      this.errorMessage = 'Birth date cannot be in the future.';
-      this.ageDetails = null;
+    if (!this.birthDate) {
+      this.errorMessage = 'Please select your birth date.';
       return;
     }
 
-    this.errorMessage = '';
-    const years = currentDate.getFullYear() - birthDate.getFullYear();
-    const months = currentDate.getMonth() - birthDate.getMonth();
-    const days = currentDate.getDate() - birthDate.getDate();
-
-    let adjustedYears = years;
-    let adjustedMonths = months;
-    let adjustedDays = days;
-
-    if (adjustedDays < 0) {
-      adjustedMonths -= 1;
-      const previousMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
-      adjustedDays += previousMonth.getDate();
+    if (ageInMillis < 0) {
+      this.errorMessage = 'Birthdate cannot be in the future.';
+      return;
     }
 
-    if (adjustedMonths < 0) {
-      adjustedYears -= 1;
-      adjustedMonths += 12;
-    }
+    this.isLoading = true;
 
-    const totalMonths = adjustedYears * 12 + adjustedMonths;
-    const totalDays = Math.floor((currentDate.getTime() - birthDate.getTime()) / (1000 * 60 * 60 * 24));
-    const totalWeeks = Math.floor(totalDays / 7);
-    const remainingDaysInWeek = totalDays % 7;
-    const totalHours = totalDays * 24;
-    const totalMinutes = totalHours * 60;
-    const totalSeconds = totalMinutes * 60;
+    setTimeout(() => {
+      const totalDays = Math.floor(ageInMillis / (1000 * 60 * 60 * 24));
+      const years = Math.floor(totalDays / 365);
+      const remainingDays = totalDays - years * 365;
+      const months = Math.floor(remainingDays / 30);
+      const days = remainingDays - months * 30;
 
-    this.ageDetails = {
-      years: adjustedYears,
-      months: adjustedMonths,
-      days: adjustedDays,
-      totalMonths,
-      remainingDays: adjustedDays,
-      totalWeeks,
-      remainingDaysInWeek,
-      totalDays,
-      totalHours,
-      totalMinutes,
-      totalSeconds
-    };
-  }
+      const totalWeeks = Math.floor(totalDays / 7);
+      const remainingDaysInWeek = totalDays % 7;
 
-  previewCustomTheme(theme: any) {
-    document.documentElement.style.setProperty('--header-color', theme.headerColor);
-    document.documentElement.style.setProperty('--background-color', theme.backgroundColor);
-    document.documentElement.style.setProperty('--font-color', theme.fontColor);
+      const totalHours = totalDays * 24;
+      const totalMinutes = totalHours * 60;
+      const totalSeconds = totalMinutes * 60;
+
+      this.ageDetails = {
+        years,
+        months,
+        days,
+        totalMonths: years * 12 + months,
+        remainingDays,
+        totalWeeks,
+        remainingDaysInWeek,
+        totalDays,
+        totalHours,
+        totalMinutes,
+        totalSeconds,
+      };
+
+      this.isLoading = false;
+    }, 1000); // simulate loading for better UX
   }
 }

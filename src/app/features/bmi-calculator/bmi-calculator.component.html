@@ -1,0 +1,120 @@
+<div
+  class="container mx-auto p-4 flex flex-col justify-center lg:flex-row gap-8"
+>
+  <!-- BMI Calculation Section -->
+  <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 bg-white">
+    <h2
+      class="text-3xl font-bold mb-6 text-center"
+      [style.color]="'var(--font-color)'"
+    >
+      ⚖️ Calculate Your BMI
+    </h2>
+
+    <!-- Initial Message (before calculation) -->
+    <div
+      *ngIf="!bmiResult && !errorMessage"
+      class="text-center mb-6 text-lg font-medium text-gray-600"
+    >
+      <p>🌟 Let's calculate your BMI! Please enter your weight and height.</p>
+      <p class="mt-4 text-sm text-gray-500">
+        Don't worry, it's easy! Just follow the instructions below.
+      </p>
+    </div>
+
+    <!-- Display BMI Result with Animation -->
+    <div
+      *ngIf="bmiResult && !errorMessage"
+      class="mb-6 flex flex-col items-center gap-4 transition-all duration-700 ease-in-out opacity-100"
+    >
+      <p
+        class="text-xl font-semibold bg-gray-100 rounded px-4 py-2 inline-block"
+      >
+        📊 Your BMI is: <span class="font-bold">{{ bmiResult }}</span>
+      </p>
+
+      <!-- Emoji & Label Based on BMI -->
+      <div class="mt-4">
+        <p class="text-lg font-medium" *ngIf="bmiResult < 18.5">
+          ⚠️ You are
+          <span class="text-blue-600 font-semibold">underweight</span>.
+        </p>
+        <p
+          class="text-lg font-medium"
+          *ngIf="bmiResult >= 18.5 && bmiResult < 24.9"
+        >
+          ✅ You have a
+          <span class="text-green-600 font-semibold">normal weight</span>.
+        </p>
+        <p
+          class="text-lg font-medium"
+          *ngIf="bmiResult >= 25 && bmiResult < 29.9"
+        >
+          ⚠️ You are
+          <span class="text-yellow-600 font-semibold">overweight</span>.
+        </p>
+        <p class="text-lg font-medium" *ngIf="bmiResult >= 30">
+          🚨 You are <span class="text-red-600 font-semibold">obese</span>.
+        </p>
+      </div>
+    </div>
+
+    <!-- Inputs -->
+    <div class="mb-6">
+      <label class="block text-lg font-medium mb-2"
+        >🏋️ Enter your weight (kg):</label
+      >
+      <input
+        type="number"
+        [(ngModel)]="weight"
+        class="border border-gray-300 p-3 rounded w-full text-lg"
+        placeholder="e.g. 70"
+      />
+    </div>
+
+    <div class="mb-6">
+      <label class="block text-lg font-medium mb-2"
+        >📏 Enter your height (cm):</label
+      >
+      <input
+        type="number"
+        [(ngModel)]="height"
+        class="border border-gray-300 p-3 rounded w-full text-lg"
+        placeholder="e.g. 175"
+      />
+    </div>
+
+    <!-- Calculate Button -->
+    <button
+      (click)="calculateBMI()"
+      class="w-full text-lg font-semibold px-6 py-3 rounded hover:opacity-90 transition"
+      [style.backgroundColor]="'var(--font-color)'"
+      [style.color]="'var(--body-color)'"
+    >
+      🧮 Calculate BMI
+    </button>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="text-red-500 mt-4 text-center">
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>
+
+  <!-- Additional Info Section -->
+  <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 bg-white">
+    <h3
+      class="text-2xl font-bold mb-4 text-center"
+      [style.color]="'var(--font-color)'"
+    >
+      🧠 Did You Know?
+    </h3>
+    <p class="text-lg mb-4">
+      🟩 A normal BMI is between <strong>18.5 and 24.9</strong>. This range is
+      generally considered healthy.
+    </p>
+    <p class="text-lg">
+      📌 BMI is a useful tool for assessing weight-related health risks, but it
+      doesn’t account for muscle mass, bone density, or overall body
+      composition.
+    </p>
+  </div>
+</div>

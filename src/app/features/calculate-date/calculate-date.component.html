@@ -1,12 +1,25 @@
-<div class="container mx-auto p-4 flex flex-col lg:flex-row gap-8">
-  <!-- Days Between Dates Section -->
+<div
+  class="container mx-auto p-4 flex flex-col justify-center lg:flex-row gap-8"
+>
+  <!-- Date Calculation Section -->
   <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 bg-white">
     <h2
       class="text-3xl font-bold mb-6 text-center"
       [style.color]="'var(--font-color)'"
     >
-      ⏳ Calculate Days Between Dates
+      📅 Add Days to a Date
     </h2>
+
+    <!-- Result Display -->
+    <div
+      *ngIf="calculatedDate && !errorMessage && !isLoading"
+      class="mb-6 flex flex-col items-center gap-3 transition-all duration-700 ease-in-out text-center"
+    >
+      <p class="text-xl font-semibold bg-green-100 rounded px-4 py-2">
+        📆 The calculated date is:
+        <span class="font-bold">{{ calculatedDate }}</span>
+      </p>
+    </div>
 
     <!-- Loading Spinner -->
     <div *ngIf="isLoading" class="mb-6 flex justify-center">
@@ -32,62 +45,52 @@
       </svg>
     </div>
 
-    <!-- Result Display -->
-    <div
-      *ngIf="daysBetween !== null && !errorMessage && !isLoading"
-      class="mb-6 text-center"
-    >
-      <p class="text-xl font-semibold bg-blue-100 rounded px-4 py-2">
-        ⏳ There are <span class="font-bold">{{ daysBetween }}</span> days
-        between the selected dates!
-      </p>
-    </div>
-
     <!-- Initial Info -->
     <div
-      *ngIf="!daysBetween && !errorMessage && !isLoading"
+      *ngIf="!calculatedDate && !errorMessage && !isLoading"
       class="text-center mb-6 text-lg font-medium text-gray-600"
     >
       <p>
-        🕰️ Want to know the gap between two dates? Just select your start and
-        end dates, and we'll calculate it!
+        📆 Planning ahead? Just pick a base date and add the number of days to
+        calculate the future date!
       </p>
       <p class="mt-4 text-sm text-gray-500">
-        Perfect for planning vacations, events, or tracking time-sensitive tasks
-        🎯
+        Perfect for deadlines, reminders, or fun future planning 🎉
       </p>
     </div>
 
-    <!-- Start Date Input -->
+    <!-- Input: Base Date -->
     <div class="mb-6">
-      <label class="block text-lg font-medium mb-2">📅 Start Date:</label>
+      <label class="block text-lg font-medium mb-2"
+        >📅 Select a Base Date:</label
+      >
       <input
         type="date"
-        [(ngModel)]="startDate"
+        [(ngModel)]="baseDate"
         class="border border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-        placeholder="Select a start date"
+        placeholder="Select a date"
       />
     </div>
 
-    <!-- End Date Input -->
+    <!-- Input: Days to Add -->
     <div class="mb-6">
-      <label class="block text-lg font-medium mb-2">📅 End Date:</label>
+      <label class="block text-lg font-medium mb-2">➕ Days to Add:</label>
       <input
-        type="date"
-        [(ngModel)]="endDate"
+        type="number"
+        [(ngModel)]="daysToAdd"
         class="border border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-        placeholder="Select an end date"
+        placeholder="Enter number of days"
       />
     </div>
 
     <!-- Calculate Button -->
     <button
-      (click)="calculateDaysBetween()"
+      (click)="calculateDate()"
       class="w-full text-lg font-semibold px-6 py-3 rounded hover:opacity-90 transition"
       [style.backgroundColor]="'var(--font-color)'"
       [style.color]="'var(--body-color)'"
     >
-      🧮 Calculate Days
+      🧮 Calculate Date
     </button>
 
     <!-- Error Message -->
@@ -96,21 +99,21 @@
     </div>
   </div>
 
-  <!-- Additional Information Section -->
+  <!-- Fun Facts Section -->
   <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 bg-white">
     <h3
       class="text-2xl font-bold mb-4 text-center"
       [style.color]="'var(--font-color)'"
     >
-      🤓 Fun Facts
+      🧠 Did You Know?
     </h3>
     <p class="text-lg mb-4">
-      ⏳ There are 86,400 seconds in a day — each one matters when you're
+      📆 There are 86,400 seconds in a day — each one matters when you're
       planning!
     </p>
     <p class="text-lg">
-      🗓️ This tool helps you track time effectively, whether for deadlines,
-      vacations, or just for fun planning! ✨
+      ⏳ This tool helps you manage time effectively — whether it’s a project
+      deadline or your next vacation 🎒
     </p>
   </div>
 </div>

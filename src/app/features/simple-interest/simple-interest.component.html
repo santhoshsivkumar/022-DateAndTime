@@ -1,0 +1,234 @@
+<div class="container mx-auto lg:p-4 p-0 flex flex-col justify-center gap-8">
+  <!-- Calculator Card -->
+  <div class="p-4 flex flex-col justify-center lg:flex-row gap-8">
+    <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 bg-white">
+      <h2
+        class="text-3xl font-bold mb-6 text-center"
+        [style.color]="'var(--font-color)'"
+      >
+        <!-- Calculator Title -->
+        💰 Simple Interest Calculator
+      </h2>
+
+      <div
+        *ngIf="simpleInterestResult && !errorMessage && !isLoading"
+        class="mb-6 flex flex-col items-center gap-3 transition-all duration-700 ease-in-out opacity-100 text-center"
+      >
+        <p class="text-xl font-semibold bg-gray-100 rounded px-4 py-2">
+          🎉 Interest:
+          <span class="font-bold">{{ simpleInterestResult.interest }}</span>
+        </p>
+        <p class="text-lg">
+          📆 Total Amount: {{ simpleInterestResult.totalAmount }}
+        </p>
+      </div>
+
+      <div *ngIf="isLoading" class="mb-6 flex justify-center">
+        <svg
+          class="animate-spin h-8 w-8 text-gray-500"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+          ></path>
+        </svg>
+      </div>
+
+      <div
+        *ngIf="!simpleInterestResult && !errorMessage && !isLoading"
+        class="text-center mb-6 text-lg font-medium text-gray-600"
+      >
+        <p>⏳ Enter the required values to calculate simple interest!</p>
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-lg font-medium mb-2"
+          >💵 Principal Amount:</label
+        >
+        <input
+          type="number"
+          [(ngModel)]="principalAmount"
+          class="border border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder="Enter principal amount"
+        />
+
+        <label class="block text-lg font-medium mb-2 mt-4">📆 Time:</label>
+        <div class="flex items-center gap-2">
+          <input
+            type="number"
+            [(ngModel)]="time"
+            class="border border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            placeholder="Enter time period"
+          />
+
+          <select
+            [(ngModel)]="timeUnit"
+            class="border border-gray-300 p-3 rounded text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          >
+            <option value="years">Year(s)</option>
+            <option value="months">Month(s)</option>
+            <option value="days">Day(s)</option>
+            <option value="minutes">Minute(s)</option>
+            <option value="seconds">Second(s)</option>
+          </select>
+        </div>
+
+        <label class="block text-lg font-medium mb-2 mt-4"
+          >💹 Rate of Interest:</label
+        >
+        <div class="flex items-center gap-2">
+          <input
+            type="number"
+            [(ngModel)]="rateOfInterest"
+            class="border border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            placeholder="Enter rate of interest"
+          />
+
+          <select
+            [(ngModel)]="interestUnit"
+            class="border border-gray-300 p-3 rounded text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          >
+            <option value="year">Per Year</option>
+            <option value="month">Per Month</option>
+            <option value="day">Per Day</option>
+            <option value="minute">Per Minute</option>
+            <option value="second">Per Second</option>
+          </select>
+        </div>
+      </div>
+
+      <button
+        (click)="calculateSimpleInterest()"
+        class="w-full text-lg font-semibold px-6 py-3 rounded hover:opacity-90 transition"
+        [style.backgroundColor]="'var(--font-color)'"
+        [style.color]="'var(--body-color)'"
+      >
+        🧮 Calculate Simple Interest
+      </button>
+
+      <div *ngIf="errorMessage" class="text-red-500 mt-4 text-center">
+        <p>🚫 {{ errorMessage }}</p>
+      </div>
+    </div>
+
+    <!-- Additional Info Section -->
+    <div class="w-full lg:w-1/2 p-6 bg-white shadow-md rounded-lg">
+      <h3 class="text-2xl font-semibold mb-4">
+        📚 Key Facts About Simple Interest
+      </h3>
+      <ul class="list-disc list-inside text-gray-700 space-y-2">
+        <li>
+          Simple Interest is calculated only on the principal, not on
+          accumulated interest.
+        </li>
+        <li>Use it for loans, savings, or investment return estimations.</li>
+        <li>
+          The longer the time or higher the rate, the more interest accumulates.
+        </li>
+        <li>Formula: <strong>(P × R × T) / 100</strong></li>
+      </ul>
+    </div>
+  </div>
+  <!-- Interest Explanation Card -->
+  <div
+    *ngIf="simpleInterestResult && !errorMessage && !isLoading"
+    class="w-full shadow-md rounded-lg p-6 bg-white"
+  >
+    <h4 class="text-2xl font-bold mb-4 text-center text-blue-600">
+      📖 How Simple Interest is Calculated
+    </h4>
+
+    <p class="text-base text-gray-700 mb-4">
+      Simple Interest is calculated using the formula:
+    </p>
+
+    <p
+      class="text-sm w-full text-center mb-4 p-4 justify-center items-center bg-gray-100 rounded-lg text-gray-800 font-mono"
+    >
+      Simple Interest (SI) = (P × R × T) / 100
+    </p>
+
+    <p class="text-base text-gray-700 mb-4">Where:</p>
+
+    <ul class="list-inside list-disc pl-6 text-gray-700 mb-4">
+      <li>
+        <strong class="text-blue-600">P</strong> = Principal amount (Loan
+        amount) 💰
+      </li>
+      <li>
+        <strong class="text-blue-600">R</strong> = Rate of interest per year 📊
+      </li>
+      <li>
+        <strong class="text-blue-600">T</strong> = Time period in years ⏳
+      </li>
+    </ul>
+
+    <p class="text-lg font-bold text-blue-700 mt-4 mb-4">
+      Based on your input:
+    </p>
+
+    <ul class="list-inside list-decimal pl-6 text-gray-700 mb-4">
+      <li>
+        Principal (<strong class="text-blue-600">P</strong>) = ₹{{
+          principalAmount | number
+        }}
+        💵
+      </li>
+      <li>
+        Interest rate (<strong class="text-blue-600">R</strong>):<br />
+        <span class="ml-2 block"
+          >• {{ rateOfInterest }}% per {{ interestUnit }}</span
+        >
+        <ul class="list-inside ml-6 mt-2 text-gray-700 list-none">
+          <li *ngFor="let rate of getConvertedInterestRates()">
+            🏷️ {{ rate.value }}
+          </li>
+        </ul>
+      </li>
+      <li>
+        Time (<strong class="text-blue-600">T</strong>) = {{ time }}
+        {{ timeUnit }} ⏰
+      </li>
+    </ul>
+
+    <!-- Breakdown Card -->
+    <div
+      class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg shadow-sm"
+    >
+      <h5 class="text-lg font-bold text-blue-700 mb-2">
+        📊 Interest Overview Based on Your Inputs
+      </h5>
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div
+          class="bg-white rounded shadow p-3"
+          *ngFor="let breakdown of getConvertedInterestBreakdown()"
+        >
+          <h6 class="font-semibold text-blue-600 mb-1">
+            💰 {{ breakdown.unit | titlecase }} Basis
+          </h6>
+          <p class="text-gray-700 text-sm">
+            Interest Rate: <strong>{{ breakdown.rate }}</strong>
+          </p>
+          <p class="text-gray-700 text-sm">
+            Total Interest: <strong>₹{{ breakdown.interest }}</strong>
+          </p>
+          <p class="text-gray-700 text-sm">
+            Total Amount: <strong>₹{{ breakdown.total }}</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
