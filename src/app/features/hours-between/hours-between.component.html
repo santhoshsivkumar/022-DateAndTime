@@ -1,11 +1,11 @@
 <div class="container mx-auto p-4 flex flex-col lg:flex-row gap-8">
-  <!-- Days Between Dates Section -->
+  <!-- Hours and Time Between Dates Section -->
   <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 bg-white">
     <h2
       class="text-3xl font-bold mb-6 text-center"
       [style.color]="'var(--font-color)'"
     >
-      ⏳ Calculate Days Between Dates
+      🕰️ Time Between Dates (Including Time)
     </h2>
 
     <!-- Loading Spinner -->
@@ -34,60 +34,65 @@
 
     <!-- Result Display -->
     <div
-      *ngIf="daysBetween !== null && !errorMessage && !isLoading"
+      *ngIf="hoursBetween !== null && !errorMessage && !isLoading"
       class="mb-6 text-center"
     >
-      <p class="text-xl font-semibold bg-blue-100 rounded px-4 py-2">
-        ⏳ There are <span class="font-bold">{{ daysBetween }}</span> days
+      <p class="text-xl font-semibold bg-green-100 rounded px-4 py-2">
+        🕰️ There are
+        <span class="font-bold"
+          >{{ hoursBetween }} hours and {{ minutesBetween }} minutes</span
+        >
         between the selected dates!
       </p>
     </div>
 
     <!-- Initial Info -->
     <div
-      *ngIf="!daysBetween && !errorMessage && !isLoading"
+      *ngIf="!hoursBetween && !errorMessage && !isLoading"
       class="text-center mb-6 text-lg font-medium text-gray-600"
     >
       <p>
-        🕰️ Want to know the gap between two dates? Just select your start and
-        end dates, and we'll calculate it!
+        ⏳ Want to calculate the time difference? Select your start and end
+        datetime below, and we’ll do the math!
       </p>
       <p class="mt-4 text-sm text-gray-500">
-        Perfect for planning vacations, events, or tracking time-sensitive tasks
-        🎯
+        Perfect for tracking event durations, project timelines, or calculating
+        deadlines ⏰
       </p>
     </div>
 
-    <!-- Start Date Input -->
+    <!-- Start Date and Time Input -->
     <div class="mb-6">
-      <label class="block text-lg font-medium mb-2">📅 Start Date:</label>
+      <label class="block text-lg font-medium mb-2"
+        >📅 Start Date and Time:</label
+      >
       <input
-        type="date"
-        [(ngModel)]="startDate"
-        class="border border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-        placeholder="Select a start date"
+        type="datetime-local"
+        [(ngModel)]="startDateTime"
+        class="border border-gray-300 p-3 rounded w-full text-lg"
       />
     </div>
 
-    <!-- End Date Input -->
+    <!-- End Date and Time Input -->
     <div class="mb-6">
-      <label class="block text-lg font-medium mb-2">📅 End Date:</label>
+      <label class="block text-lg font-medium mb-2"
+        >📅 End Date and Time:</label
+      >
       <input
-        type="date"
-        [(ngModel)]="endDate"
-        class="border border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-        placeholder="Select an end date"
+        type="datetime-local"
+        [(ngModel)]="endDateTime"
+        class="border border-gray-300 p-3 rounded w-full text-lg"
       />
     </div>
 
     <!-- Calculate Button -->
     <button
-      (click)="calculateDaysBetween()"
+      (click)="calculateTimeBetween()"
       class="w-full text-lg font-semibold px-6 py-3 rounded hover:opacity-90 transition"
       [style.backgroundColor]="'var(--font-color)'"
       [style.color]="'var(--body-color)'"
     >
-      🧮 Calculate Days
+      🧮 Calculate Time Difference
     </button>
 
     <!-- Error Message -->
@@ -105,12 +110,13 @@
       🤓 Fun Facts
     </h3>
     <p class="text-lg mb-4">
-      ⏳ There are 86,400 seconds in a day — each one matters when you're
-      planning!
+      🕰️ Time between dates is useful for many tasks such as project planning,
+      scheduling, and deadline tracking. Now you can even calculate the exact
+      time difference!
     </p>
     <p class="text-lg">
-      🗓️ This tool helps you track time effectively, whether for deadlines,
-      vacations, or just for fun planning! ✨
+      📅 Use this tool to track event durations, project timelines, or simply
+      measure time between any two points.
     </p>
   </div>
 </div>

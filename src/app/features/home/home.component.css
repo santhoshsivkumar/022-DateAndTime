@@ -1,0 +1,31 @@
+.app-feature-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  max-height: 12rem; /* Ensure consistent height */
+  max-width: 100%; /* Ensure consistent width */
+}
+
+.grid {
+  gap: 1rem; /* Adjust spacing between cards */
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for small devices */
+  }
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for medium devices */
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns for large devices */
+  }
+}

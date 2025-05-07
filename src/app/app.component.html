@@ -1,3 +1,16 @@
 <app-nav-bar></app-nav-bar>
-<app-themes #themesComponent></app-themes>
-<router-outlet></router-outlet>
+<div class="container flex flex-col mx-auto lg:p-4 p-2">
+  <div class="flex justify-between items-center">
+    <!-- Left-aligned items -->
+    <div *ngIf="router.url !== '/'">
+      <app-go-back></app-go-back>
+    </div>
+
+    <!-- Right-aligned themes -->
+    <div class="ml-auto">
+      <app-themes #themesComponent></app-themes>
+    </div>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>

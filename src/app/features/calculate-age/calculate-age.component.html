@@ -1,45 +1,119 @@
-<div class="container mx-auto p-4 flex flex-col lg:flex-row gap-8" >
-  <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6">
-    <app-go-back></app-go-back>
-    <h2 class="text-3xl font-bold mb-6 text-center" [style.color]="'var(--font-color)'">
-      Calculate Your Age
+<div
+  class="container mx-auto p-4 flex flex-col justify-center lg:flex-row gap-8"
+>
+  <!-- Age Calculation Section -->
+  <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 bg-white">
+    <h2
+      class="text-3xl font-bold mb-6 text-center"
+      [style.color]="'var(--font-color)'"
+    >
+      🎂 Calculate Your Age
     </h2>
+
+    <!-- Display Age Result -->
+    <div
+      *ngIf="ageDetails && !errorMessage && !isLoading"
+      class="mb-6 flex flex-col items-center gap-3 transition-all duration-700 ease-in-out opacity-100 text-center"
+    >
+      <p class="text-xl font-semibold bg-gray-100 rounded px-4 py-2">
+        🎉 You are:
+        <span class="font-bold">{{ ageDetails.years }}</span> years
+        <span>{{ ageDetails.months }}</span> months
+        <span>{{ ageDetails.days }}</span> days old!
+      </p>
+      <p class="text-lg">
+        📆 Total: {{ ageDetails.totalDays }} days /
+        {{ ageDetails.totalWeeks }} weeks
+      </p>
+      <p class="text-lg">
+        ⏱️ That’s {{ ageDetails.totalHours }} hours or
+        {{ ageDetails.totalMinutes }} minutes or
+        {{ ageDetails.totalSeconds }} seconds!
+      </p>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div *ngIf="isLoading" class="mb-6 flex justify-center">
+      <svg
+        class="animate-spin h-8 w-8 text-gray-500"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle
+          class="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          stroke-width="4"
+        ></circle>
+        <path
+          class="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+        ></path>
+      </svg>
+    </div>
+
+    <!-- Initial Message (before calculation) -->
+    <div
+      *ngIf="!ageDetails && !errorMessage && !isLoading"
+      class="text-center mb-6 text-lg font-medium text-gray-600"
+    >
+      <p>
+        ⏳ Curious how old you really are? Enter your birth date to find out!
+      </p>
+      <p class="mt-4 text-sm text-gray-500">
+        We’ll break it down for you — years, months, even seconds!
+      </p>
+    </div>
+
+    <!-- Input Field -->
     <div class="mb-6">
-      <label class="block text-lg font-medium mb-2">Enter your birth date:</label>
+      <label class="block text-lg font-medium mb-2"
+        >📅 Enter your birth date:</label
+      >
       <input
         type="date"
         [(ngModel)]="birthDate"
-        class="border border-gray-300 p-3 rounded w-full text-lg">
+        class="border border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        placeholder="Select your birthdate"
+      />
     </div>
+
+    <!-- Calculate Button -->
     <button
       (click)="calculateAge()"
       class="w-full text-lg font-semibold px-6 py-3 rounded hover:opacity-90 transition"
-      [style.backgroundColor]="'var(--header-color)'"
-      [style.color]="'var(--body-color)'">
-      Calculate Age
+      [style.backgroundColor]="'var(--font-color)'"
+      [style.color]="'var(--body-color)'"
+    >
+      🧮 Calculate Age
     </button>
+
+    <!-- Error Message -->
     <div *ngIf="errorMessage" class="text-red-500 mt-4 text-center">
-      <p>{{ errorMessage }}</p>
-    </div>
-    <div *ngIf="ageDetails && !errorMessage" class="mt-6 text-center">
-      <p class="text-xl font-semibold">Age: {{ ageDetails.years }} years {{ ageDetails.months }} months {{ ageDetails.days }} days</p>
-      <p class="text-lg mt-2">or {{ ageDetails.totalMonths }} months {{ ageDetails.remainingDays }} days</p>
-      <p class="text-lg mt-2">or {{ ageDetails.totalWeeks }} weeks {{ ageDetails.remainingDaysInWeek }} days</p>
-      <p class="text-lg mt-2">or {{ ageDetails.totalDays }} days</p>
-      <p class="text-lg mt-2">or {{ ageDetails.totalHours }} hours</p>
-      <p class="text-lg mt-2">or {{ ageDetails.totalMinutes }} minutes</p>
-      <p class="text-lg mt-2">or {{ ageDetails.totalSeconds }} seconds</p>
+      <p>🚫 {{ errorMessage }}</p>
     </div>
   </div>
-  <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6">
-    <h3 class="text-2xl font-bold mb-4 text-center" [style.color]="'var(--font-color)'">
-      Additional Information
+
+  <!-- Additional Info Section -->
+  <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 bg-white">
+    <h3
+      class="text-2xl font-bold mb-4 text-center"
+      [style.color]="'var(--font-color)'"
+    >
+      📚 Did You Know?
     </h3>
     <p class="text-lg mb-4">
-      Did you know? The average human lifespan is approximately 79 years, which is about 28,835 days or 692,040 hours!
+      🕰️ The average human lifespan is about <strong>79 years</strong> — that's
+      nearly <strong>29,000 days</strong> or over
+      <strong>692,000 hours</strong>!
     </p>
     <p class="text-lg">
-      Use this tool to calculate your age in various units and reflect on how precious time is. Make every second count!
+      💡 This tool helps you realize how valuable time is. Make each moment
+      count and live meaningfully! 🧘
     </p>
   </div>
 </div>
