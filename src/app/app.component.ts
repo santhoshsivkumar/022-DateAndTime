@@ -20,6 +20,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'date time hub';
+  title = 'ToolBox App';
   constructor(public router: Router) {}
 }
