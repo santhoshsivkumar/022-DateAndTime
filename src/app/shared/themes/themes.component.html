@@ -1,0 +1,96 @@
+<div>
+  <!-- Rounded button to toggle the popup -->
+  <button
+    class="rounded-full bg-blue-600 text-white w-12 h-12 flex items-center justify-center fixed top-20 z-40 right-4 shadow-lg hover:bg-blue-700 transition toggle-popup-button"
+    (click)="togglePopup($event)">
+    <span *ngIf="!showPopup">🎨</span>
+    <span *ngIf="showPopup">🎨</span>
+  </button>
+
+  <!-- Popup modal -->
+  <div *ngIf="showPopup" class="themes-popup">
+    <h2 class="text-lg font-bold mb-4">Theme Settings</h2>
+
+    <div class="toggle-section">
+      <label class="flex items-center gap-2">
+        <input type="checkbox" [checked]="darkMode" (change)="toggleDarkMode()" />
+        <span>Enable Dark Mode</span>
+      </label>
+    </div>
+
+    <h3 class="text-md font-semibold mt-4 mb-2">Default Themes</h3>
+    <div class="default-themes">
+      <div
+        *ngFor="let theme of defaultThemes"
+        class="theme-box"
+        [class.active]="theme.colors.headerColor === headerColor && theme.colors.backgroundColor === backgroundColor"
+        (click)="applyTheme(theme.colors)"
+        [title]="theme.name"> <!-- Use the name as a tooltip -->
+        <div
+          class="half-box"
+          [style.backgroundColor]="
+            theme.colors.headerColor || 
+            (theme.colors.backgroundColor && !theme.colors.textColor ? theme.colors.backgroundColor : '') || 
+            (theme.colors.textColor && !theme.colors.backgroundColor ? theme.colors.textColor : '')">
+        </div>
+        <div
+          class="half-box"
+          [style.backgroundColor]="
+            theme.colors.backgroundColor || 
+            (theme.colors.headerColor && !theme.colors.textColor ? theme.colors.headerColor : '') || 
+            (theme.colors.textColor && !theme.colors.headerColor ? theme.colors.textColor : '')">
+        </div>
+      </div>
+    </div>
+
+    <div class="toggle-section mt-4">
+      <label class="flex items-center gap-2">
+        <input type="checkbox" [checked]="customThemeEnabled" (change)="enableCustomTheme()" />
+        <span>Enable Custom Themes</span>
+      </label>
+    </div>
+
+    <div *ngIf="customThemes.length > 0" class="custom-themes mt-4">
+      <div
+        *ngFor="let theme of customThemes; let i = index"
+        class="theme-box"
+        (click)="applyTheme(theme)"
+        (mouseover)="previewCustomTheme(theme)">
+        <div
+          class="half-box"
+          [style.backgroundColor]="theme.headerColor">
+        </div>
+        <div
+          class="half-box"
+          [style.backgroundColor]="theme.backgroundColor">
+        </div>
+        <button
+          class="delete-button"
+          (click)="deleteCustomTheme(i); $event.stopPropagation();">
+          🗑
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="customThemeEnabled" class="custom-theme-section mt-4">
+      <label class="block mb-2">
+        Header Color:
+        <input type="color" [(ngModel)]="headerColor" class="color-picker" />
+      </label>
+      <label class="block mb-2">
+        Background Color:
+        <input type="color" [(ngModel)]="backgroundColor" class="color-picker" />
+      </label>
+      <label class="block mb-2">
+        Font Color:
+        <input type="color" [(ngModel)]="fontColor" class="color-picker" />
+      </label>
+      <button
+        (click)="submitCustomTheme()"
+        class="submit-button mt-4">
+        Apply Custom Theme
+      </button>
+    </div>
+  </div>
+</div>
+

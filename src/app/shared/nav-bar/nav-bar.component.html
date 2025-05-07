@@ -1,0 +1,10 @@
+<nav [style.backgroundColor]="'var(--header-color)'" [style.color]="'var(--title-color)'" class="p-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <a class="text-2xl font-bold" routerLink="/" aria-label="Home">DateTimeHub</a>
+    <ul class="flex space-x-4">
+      <li *ngFor="let link of links">
+        <a [routerLink]="link.path" class="hover:underline" [style.color]="'var(--text-color)'" [attr.aria-label]="link.label">{{ link.label }}</a>
+      </li>
+    </ul>
+  </div>
+</nav>

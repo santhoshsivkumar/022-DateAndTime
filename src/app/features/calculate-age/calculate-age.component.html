@@ -1,19 +1,45 @@
-<div class="container mx-auto p-4">
-    <h2 class="text-2xl font-bold mb-4">Calculate Age</h2>
-    <div class="mb-4">
-      <label class="block mb-2">Enter your birth date:</label>
+<div class="container mx-auto p-4 flex flex-col lg:flex-row gap-8" >
+  <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6">
+    <app-go-back></app-go-back>
+    <h2 class="text-3xl font-bold mb-6 text-center" [style.color]="'var(--font-color)'">
+      Calculate Your Age
+    </h2>
+    <div class="mb-6">
+      <label class="block text-lg font-medium mb-2">Enter your birth date:</label>
       <input
         type="date"
         [(ngModel)]="birthDate"
-        class="border border-gray-300 p-2 rounded w-full">
+        class="border border-gray-300 p-3 rounded w-full text-lg">
     </div>
     <button
       (click)="calculateAge()"
-      class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+      class="w-full text-lg font-semibold px-6 py-3 rounded hover:opacity-90 transition"
+      [style.backgroundColor]="'var(--header-color)'"
+      [style.color]="'var(--body-color)'">
       Calculate Age
     </button>
-    <div *ngIf="age !== null" class="mt-4">
-      <p>You are {{ age }} years old.</p>
+    <div *ngIf="errorMessage" class="text-red-500 mt-4 text-center">
+      <p>{{ errorMessage }}</p>
+    </div>
+    <div *ngIf="ageDetails && !errorMessage" class="mt-6 text-center">
+      <p class="text-xl font-semibold">Age: {{ ageDetails.years }} years {{ ageDetails.months }} months {{ ageDetails.days }} days</p>
+      <p class="text-lg mt-2">or {{ ageDetails.totalMonths }} months {{ ageDetails.remainingDays }} days</p>
+      <p class="text-lg mt-2">or {{ ageDetails.totalWeeks }} weeks {{ ageDetails.remainingDaysInWeek }} days</p>
+      <p class="text-lg mt-2">or {{ ageDetails.totalDays }} days</p>
+      <p class="text-lg mt-2">or {{ ageDetails.totalHours }} hours</p>
+      <p class="text-lg mt-2">or {{ ageDetails.totalMinutes }} minutes</p>
+      <p class="text-lg mt-2">or {{ ageDetails.totalSeconds }} seconds</p>
     </div>
   </div>
-  
+  <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6">
+    <h3 class="text-2xl font-bold mb-4 text-center" [style.color]="'var(--font-color)'">
+      Additional Information
+    </h3>
+    <p class="text-lg mb-4">
+      Did you know? The average human lifespan is approximately 79 years, which is about 28,835 days or 692,040 hours!
+    </p>
+    <p class="text-lg">
+      Use this tool to calculate your age in various units and reflect on how precious time is. Make every second count!
+    </p>
+  </div>
+</div>

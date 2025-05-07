@@ -1,3 +1,114 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  
+  /*========== Colors ==========*/
+  --hue: 0;
+  --sat: 0%;
+  --title-color: hsl(var(--hue), var(--sat), 20%);
+  --title-color-dark: hsl(var(--hue), var(--sat), 0%);
+  --text-color: hsl(var(--hue), var(--sat), 46%);
+  --body-color: hsl(var(--hue), var(--sat), 98%);
+  --container-color: #fff;
+
+  /*========== Font and typography ==========*/
+  --body-font: "Poppins", sans-serif;
+
+  /*========== Font sizes ==========*/
+  --big-font-size: 3.5rem;
+  --h1-font-size: 2.25rem;
+  --h2-font-size: 1.5rem;
+  --h3-font-size: 1.25rem;
+  --normal-font-size: 1rem;
+  --small-font-size: 0.875rem;
+
+  /*========== Font weight ==========*/
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+  --z-modal: 1000;
+
+  /*========== Theme-specific variables ==========*/
+  --light-border-color: 2px solid rgba(0, 0, 0, 0.3);
+  --light-background-color: #fff;
+  --light-text-color: #333;
+  --dark-background-color: #333;
+  --dark-text-color: #fff;
+  --light-title-color: #333333;
+  --dark-title-color: #fff;
+  --light-container-color: #fff;
+  --dark-container-color: #333;
+  --lighttitle-color-dark: #000000;
+  --darktitle-color-dark: #fff;
+}
+
+[data-theme="light"] {
+  --body-color: var(--light-background-color);
+  --text-color: var(--light-text-color);
+  --container-color: var(--body-color);
+  --header-color: var(--body-color);
+  --title-color: var(--light-title-color);
+  --title-color-dark: var(--lighttitle-color-dark);
+  --border-color: var(--light-border-color);
+}
+
+[data-theme="dark"] {
+  --body-color: var(--dark-background-color);
+  --text-color: var(--dark-text-color);
+  --container-color: var(--dark-container-color);
+  --title-color: var(--dark-title-color);
+  --title-color-dark: var(--darktitle-color-dark);
+  --border-color: var(--light-border-color);
+  --header-color: var(--body-color);
+}
+
+/*=============== BASE ===============*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+}
+
+h1, h2, h3 {
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: var(--title-color);
+  color: var(--container-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: var(--font-medium);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--title-color-dark);
+}
+
+h2, h3 {
+  transition: color 0.3s ease;
+}

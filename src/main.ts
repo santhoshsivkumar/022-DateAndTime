@@ -13,3 +13,7 @@ bootstrapApplication(AppComponent, {
     provideAnimations()
   ]
 });
+
+document.documentElement.style.setProperty('--header-color', '#ffffff');
+document.documentElement.style.setProperty('--background-color', '#f0f0f0');
+document.documentElement.style.setProperty('--font-color', '#000000');
