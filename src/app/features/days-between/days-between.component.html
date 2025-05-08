@@ -1,10 +1,7 @@
 <div class="container mx-auto p-4 flex flex-col lg:flex-row gap-8">
   <!-- Days Between Dates Section -->
-  <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 bg-white">
-    <h2
-      class="text-3xl font-bold mb-6 text-center"
-      [style.color]="'var(--font-color)'"
-    >
+  <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 border">
+    <h2 class="text-3xl font-bold mb-6 text-center title__color">
       ⏳ Calculate Days Between Dates
     </h2>
 
@@ -64,7 +61,7 @@
       <input
         type="date"
         [(ngModel)]="startDate"
-        class="border border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        class="border p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
         placeholder="Select a start date"
       />
     </div>
@@ -83,9 +80,7 @@
     <!-- Calculate Button -->
     <button
       (click)="calculateDaysBetween()"
-      class="w-full text-lg font-semibold px-6 py-3 rounded hover:opacity-90 transition"
-      [style.backgroundColor]="'var(--font-color)'"
-      [style.color]="'var(--body-color)'"
+      class="w-full text-lg font-semibold button px-6 py-3 button rounded transition"
     >
       🧮 Calculate Days
     </button>
@@ -97,11 +92,8 @@
   </div>
 
   <!-- Additional Information Section -->
-  <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 bg-white">
-    <h3
-      class="text-2xl font-bold mb-4 text-center"
-      [style.color]="'var(--font-color)'"
-    >
+  <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 border text__color">
+    <h3 class="text-2xl font-bold mb-4 text-center title__color">
       🤓 Fun Facts
     </h3>
     <p class="text-lg mb-4">

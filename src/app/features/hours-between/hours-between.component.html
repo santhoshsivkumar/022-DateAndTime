@@ -1,6 +1,6 @@
 <div class="container mx-auto p-4 flex flex-col lg:flex-row gap-8">
   <!-- Hours and Time Between Dates Section -->
-  <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 bg-white">
+  <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 border">
     <h2
       class="text-3xl font-bold mb-6 text-center"
       [style.color]="'var(--font-color)'"
@@ -88,9 +88,7 @@
     <!-- Calculate Button -->
     <button
       (click)="calculateTimeBetween()"
-      class="w-full text-lg font-semibold px-6 py-3 rounded hover:opacity-90 transition"
-      [style.backgroundColor]="'var(--font-color)'"
-      [style.color]="'var(--body-color)'"
+      class="w-full text-lg font-semibold button px-6 py-3 rounded button transition"
     >
       🧮 Calculate Time Difference
     </button>
@@ -102,11 +100,8 @@
   </div>
 
   <!-- Additional Information Section -->
-  <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 bg-white">
-    <h3
-      class="text-2xl font-bold mb-4 text-center"
-      [style.color]="'var(--font-color)'"
-    >
+  <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 text__color border">
+    <h3 class="text-2xl font-bold mb-4 text-center title__color">
       🤓 Fun Facts
     </h3>
     <p class="text-lg mb-4">

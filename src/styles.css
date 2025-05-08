@@ -8,50 +8,26 @@
 /*=============== VARIABLES CSS ===============*/
 :root {
   user-select: none;
-  -webkit-tap-highlight-color: transparent;
-
-  /*========== Colors ==========*/
-  --hue: 0;
-  --sat: 0%;
-  --title-color: hsl(var(--hue), var(--sat), 20%);
-  --title-color-dark: hsl(var(--hue), var(--sat), 0%);
-  --text-color: hsl(var(--hue), var(--sat), 46%);
-  --body-color: hsl(var(--hue), var(--sat), 98%);
-  --container-color: #fff;
 
   /*========== Font and typography ==========*/
   --body-font: "Poppins", sans-serif;
 
-  /*========== Font sizes ==========*/
-  --big-font-size: 3.5rem;
-  --h1-font-size: 2.25rem;
-  --h2-font-size: 1.5rem;
-  --h3-font-size: 1.25rem;
-  --normal-font-size: 1rem;
-  --small-font-size: 0.875rem;
-
-  /*========== Font weight ==========*/
-  --font-normal: 400;
-  --font-medium: 500;
-  --font-semi-bold: 600;
-
-  /*========== z index ==========*/
-  --z-tooltip: 10;
-  --z-fixed: 100;
-  --z-modal: 1000;
-
   /*========== Theme-specific variables ==========*/
+
   --light-border-color: 2px solid rgba(0, 0, 0, 0.3);
+
   --light-background-color: #fff;
   --light-text-color: #333;
+
   --dark-background-color: #333;
   --dark-text-color: #fff;
-  --light-title-color: #333333;
-  --dark-title-color: #fff;
+
   --light-container-color: #fff;
   --dark-container-color: #333;
-  --lighttitle-color-dark: #000000;
-  --darktitle-color-dark: #fff;
+
+  --light-title-color: #fff;
+
+  --dark-title-color: #000000;
 }
 
 [data-theme="light"] {
@@ -59,8 +35,7 @@
   --text-color: var(--light-text-color);
   --container-color: var(--body-color);
   --header-color: var(--body-color);
-  --title-color: var(--light-title-color);
-  --title-color-dark: var(--lighttitle-color-dark);
+  --title-color: var(--dark-title-color);
   --border-color: var(--light-border-color);
 }
 
@@ -68,49 +43,40 @@
   --body-color: var(--dark-background-color);
   --text-color: var(--dark-text-color);
   --container-color: var(--dark-container-color);
-  --title-color: var(--dark-title-color);
-  --title-color-dark: var(--darktitle-color-dark);
+  --title-color: var(--light-title-color);
   --border-color: var(--light-border-color);
   --header-color: var(--body-color);
 }
-
-/*=============== BASE ===============*/
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+html {
+  font-family: "Poppins", sans-serif;
 }
 
-html,
-body {
-  background-color: #f4f4f9;
+/*=============== Common STYLES ===============*/
+
+.button {
+  background-color: var(--text-color);
+  color: var(--body-color);
+}
+
+.button:hover {
+  background-color: color-mix(in srgb, var(--text-color) 30%, #fff);
+}
+.title__color {
   color: var(--text-color);
-  font-family: var(--body-font);
-  font-size: var(--normal-font-size);
 }
-
-h1,
-h2,
-h3 {
+.text__color {
   color: var(--title-color);
-  font-weight: var(--font-semi-bold);
 }
-
-h2,
-h3 {
-  transition: color 0.3s ease;
+.body__color {
+  color: var(--body-color);
 }
-
-/* common template for all */
-/* Common Styles */
-h2,
-h3 {
-  color: var(--font-color);
+.container__color {
+  color: var(--container-color);
 }
-
-input {
-  border: 2px solid #ddd;
-  padding: 10px;
-  margin-top: 5px;
-  font-size: 16px;
+.header__color {
+  color: var(--header-color);
 }
+.border__color {
+  border-color: var(--border-color);
+}
+/*=============== Common STYLES ===============*/

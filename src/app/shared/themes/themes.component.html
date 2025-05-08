@@ -1,110 +1,198 @@
-<!-- Rounded button to toggle the popup -->
-<button
-  class="rounded-full bg-blue-600 text-white w-12 h-12 flex items-center justify-center z-40 shadow-lg hover:bg-blue-700 transition toggle-popup-button"
-  (click)="togglePopup($event)"
->
-  <span *ngIf="!showPopup">🎨</span>
-  <span *ngIf="showPopup">🎨</span>
-</button>
+<div class="relative">
+  <!-- Open Modal Button -->
+  <button
+    class="themes__button absolute top-4 right-4 p-2 rounded-full shadow-md transition"
+    (click)="togglePopup()"
+    title="Themes"
+  >
+    🎨
+  </button>
 
-<!-- Popup modal -->
-<div *ngIf="showPopup" class="themes-popup">
-  <h2 class="text-lg font-bold mb-4">Theme Settings</h2>
+  <!-- Modal -->
+  <div
+    *ngIf="isOpen"
+    class="themes__model absolute top-16 right-0 shadow-lg rounded-lg p-4 w-80 z-50"
+  >
+    <div class="flex flex-col space-y-3">
+      <!-- Dark Mode Toggle -->
+      <div class="themes__model-content flex justify-between items-center">
+        <span class="" [style.color]="'var(--title-color)'">{{
+          isDarkMode ? "Disable Dark Mode" : "Enable Dark Mode"
+        }}</span>
+        <label class="toggle__switch">
+          <input
+            type="checkbox"
+            id="DarkModeCheckbox"
+            class="hidden"
+            [checked]="isDarkMode"
+            (change)="toggleTheme($event)"
+          />
+          <span
+            class="toggle__slider"
+            [style.background]="'var(--text-color)'"
+          ></span>
+        </label>
+      </div>
 
-  <div class="toggle-section">
-    <label class="flex items-center gap-2">
-      <input type="checkbox" [checked]="darkMode" (change)="toggleDarkMode()" />
-      <span>Enable Dark Mode</span>
-    </label>
-  </div>
+      <!-- Default Themes -->
+      <div>
+        <p class="mb-2" [style.color]="'var(--title-color)'">Default Themes</p>
+        <div class="themes_colors-container">
+          <button
+            *ngFor="let theme of defaultThemes; let i = index"
+            class="themes_colors-button relative"
+            [ngClass]="{
+              'themes_colors-button-active': activeThemeIndex === i
+            }"
+            [ngStyle]="{
+              border:
+                i === 0
+                  ? '2px solid var(--title-color)'
+                  : activeThemeIndex === i
+                  ? '3.5px solid var(--title-color)'
+                  : ''
+            }"
+            (click)="applyTheme(theme.colors, i, false)"
+            [title]="theme.name"
+          >
+            <div
+              class="themes_colors-button-part"
+              [style.background]="
+                theme.colors.headerColor || theme.colors.textColor
+              "
+            >
+              <span class="absolute top-[4px] right-[5px]">{{
+                i == 0 ? "🧹" : ""
+              }}</span>
+            </div>
+            <div
+              class="themes_colors-button-part"
+              [style.background]="
+                theme.colors.backgroundColor || theme.colors.textColor
+              "
+            ></div>
+          </button>
+        </div>
+      </div>
 
-  <h3 class="text-md font-semibold mt-4 mb-2">Default Themes</h3>
-  <div class="default-themes">
-    <div
-      *ngFor="let theme of defaultThemes"
-      class="theme-box"
-      [class.active]="
-        theme.colors.headerColor === headerColor &&
-        theme.colors.backgroundColor === backgroundColor
-      "
-      (click)="applyTheme(theme.colors)"
-      [title]="theme.name"
-    >
-      <!-- Use the name as a tooltip -->
-      <div
-        class="half-box"
-        [style.backgroundColor]="
-          theme.colors.headerColor ||
-          (theme.colors.backgroundColor && !theme.colors.textColor
-            ? theme.colors.backgroundColor
-            : '') ||
-          (theme.colors.textColor && !theme.colors.backgroundColor
-            ? theme.colors.textColor
-            : '')
-        "
-      ></div>
-      <div
-        class="half-box"
-        [style.backgroundColor]="
-          theme.colors.backgroundColor ||
-          (theme.colors.headerColor && !theme.colors.textColor
-            ? theme.colors.headerColor
-            : '') ||
-          (theme.colors.textColor && !theme.colors.headerColor
-            ? theme.colors.textColor
-            : '')
-        "
-      ></div>
+      <!-- Custom Themes -->
+      <div class="space-y-3">
+        <div class="flex justify-between items-center my-2">
+          <span [style.color]="'var(--title-color)'">{{
+            isCustomThemeEnabled
+              ? "Disable Custom Themes"
+              : "Enable Custom Themes"
+          }}</span>
+          <label class="toggle__switch">
+            <input
+              type="checkbox"
+              id="CustomThemeCheckbox"
+              class="hidden"
+              [checked]="isCustomThemeEnabled"
+              (change)="toggleCustomThemes($event)"
+            />
+            <span
+              class="toggle__slider"
+              [style.background]="'var(--text-color)'"
+            ></span>
+          </label>
+        </div>
+
+        <div *ngIf="isCustomThemeEnabled">
+          <div class="themes_colors-container">
+            <button
+              *ngIf="customThemes.length > 0"
+              class="custom-theme__delete-button"
+              (click)="deleteCustomTheme()"
+              title="Delete Current Theme"
+            >
+              🗑️
+            </button>
+            <button
+              *ngFor="let theme of customThemes; let i = index"
+              class="themes_colors-button"
+              [ngClass]="{
+                'themes_colors-button-active': activeCustomThemeIndex === i
+              }"
+              (click)="applyTheme(theme.colors, i, true)"
+              [title]="theme.name"
+            >
+              <div
+                class="themes_colors-button-part"
+                [style.background]="
+                  theme.colors.headerColor || theme.colors.textColor
+                "
+              ></div>
+              <div
+                class="themes_colors-button-part"
+                [style.background]="
+                  theme.colors.backgroundColor || theme.colors.textColor
+                "
+              ></div>
+            </button>
+          </div>
+          <div class="themes_colors-container flex justify-center mt-4">
+            <button
+              *ngIf="!isAddingNewTheme"
+              class="custom-theme__add-button w-fit px-2 py-1 rounded shadow-md transition"
+              (click)="addNewTheme()"
+            >
+              Add New Theme
+            </button>
+          </div>
+          <div *ngIf="isAddingNewTheme" class="custom-theme__form">
+            <div
+              class="custom-theme__form-row flex justify-between items-center mt-1"
+            >
+              <span [style.color]="'var(--title-color)'"> Header Color </span>
+              <input
+                id="headerColor"
+                type="color"
+                [(ngModel)]="newTheme.headerColor"
+                (input)="updateLiveTheme()"
+                class="w-12 h-6 border rounded"
+              />
+            </div>
+            <div
+              class="custom-theme__form-row flex justify-between items-center"
+            >
+              <label [style.color]="'var(--title-color)'">
+                Background Color
+              </label>
+              <input
+                id="backgroundColor"
+                type="color"
+                [(ngModel)]="newTheme.backgroundColor"
+                (input)="updateLiveTheme()"
+                class="w-12 h-6 border rounded"
+              />
+            </div>
+            <div
+              class="custom-theme__form-row flex justify-between items-center"
+            >
+              <label [style.color]="'var(--title-color)'"> Text Color </label>
+              <input
+                id="textColor"
+                type="color"
+                [(ngModel)]="newTheme.textColor"
+                (input)="updateLiveTheme()"
+                class="w-12 h-6 border rounded"
+              />
+            </div>
+            <div class="flex justify-evenly mt-1 items-center">
+              <button
+                class="custom-theme__save-button"
+                (click)="saveNewTheme()"
+              >
+                Save Theme
+              </button>
+              <button class="custom-theme__save-button" (click)="cancelTheme()">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <div class="toggle-section mt-4">
-    <label class="flex items-center gap-2">
-      <input
-        type="checkbox"
-        [checked]="customThemeEnabled"
-        (change)="enableCustomTheme()"
-      />
-      <span>Enable Custom Themes</span>
-    </label>
-  </div>
-
-  <div *ngIf="customThemes.length > 0" class="custom-themes mt-4">
-    <div
-      *ngFor="let theme of customThemes; let i = index"
-      class="theme-box"
-      (click)="applyTheme(theme)"
-      (mouseover)="previewCustomTheme(theme)"
-    >
-      <div class="half-box" [style.backgroundColor]="theme.headerColor"></div>
-      <div
-        class="half-box"
-        [style.backgroundColor]="theme.backgroundColor"
-      ></div>
-      <button
-        class="delete-button"
-        (click)="deleteCustomTheme(i); $event.stopPropagation()"
-      >
-        🗑
-      </button>
-    </div>
-  </div>
-
-  <div *ngIf="customThemeEnabled" class="custom-theme-section mt-4">
-    <label class="block mb-2">
-      Header Color:
-      <input type="color" [(ngModel)]="headerColor" class="color-picker" />
-    </label>
-    <label class="block mb-2">
-      Background Color:
-      <input type="color" [(ngModel)]="backgroundColor" class="color-picker" />
-    </label>
-    <label class="block mb-2">
-      Font Color:
-      <input type="color" [(ngModel)]="fontColor" class="color-picker" />
-    </label>
-    <button (click)="submitCustomTheme()" class="submit-button mt-4">
-      Apply Custom Theme
-    </button>
   </div>
 </div>
