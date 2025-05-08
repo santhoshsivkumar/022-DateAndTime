@@ -1,19 +1,19 @@
 import { Routes } from '@angular/router';
-import { CalculateAgeComponent } from './features/calculate-age/calculate-age.component';
+import { CalculateAgeComponent } from './features/date-time-tools/calculate-age/calculate-age.component';
 import { HomeComponent } from './features/home/home.component';
-import { DaysBetweenComponent } from './features/days-between/days-between.component';
-import { CalculateDateComponent } from './features/calculate-date/calculate-date.component';
-import { WeeksBetweenComponent } from './features/weeks-between/weeks-between.component';
-import { MonthsBetweenComponent } from './features/months-between/months-between.component';
-import { HoursBetweenComponent } from './features/hours-between/hours-between.component';
+import { DaysBetweenComponent } from './features/date-time-tools/days-between/days-between.component';
+import { CalculateDateComponent } from './features/date-time-tools/calculate-date/calculate-date.component';
+import { WeeksBetweenComponent } from './features/date-time-tools/weeks-between/weeks-between.component';
+import { MonthsBetweenComponent } from './features/date-time-tools/months-between/months-between.component';
+import { HoursBetweenComponent } from './features/date-time-tools/hours-between/hours-between.component';
 
-import { PasswordGeneratorComponent } from './features/password-generator/password-generator.component';
-import { BMICalculatorComponent } from './features/bmi-calculator/bmi-calculator.component';
-import { SimpleInterestComponent } from './features/simple-interest/simple-interest.component';
-import { CompoundInterestComponent } from './features/compound-interest/compound-interest.component';
-import { LoanEmiCalculatorComponent } from './features/loan-emi-calculator/loan-emi-calculator.component';
-import { PercentageCalculatorComponent } from './features/percentage-calculator/percentage-calculator.component';
-import { NumberBaseConverterComponent } from './features/number-base-converter/number-base-converter.component';
+import { PasswordGeneratorComponent } from './features/utilities/password-generator/password-generator.component';
+import { BMICalculatorComponent } from './features/utilities/bmi-calculator/bmi-calculator.component';
+import { SimpleInterestComponent } from './features/math-finance-tools/simple-interest/simple-interest.component';
+import { CompoundInterestComponent } from './features/math-finance-tools/compound-interest/compound-interest.component';
+import { LoanEmiCalculatorComponent } from './features/math-finance-tools/loan-emi-calculator/loan-emi-calculator.component';
+import { PercentageCalculatorComponent } from './features/math-finance-tools/percentage-calculator/percentage-calculator.component';
+import { NumberBaseConverterComponent } from './features/utilities/number-base-converter/number-base-converter.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent }, // Updated to use HomeComponent
