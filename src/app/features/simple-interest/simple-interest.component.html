@@ -12,7 +12,7 @@
 
       <div
         *ngIf="simpleInterestResult && !errorMessage && !isLoading"
-        class="mb-6 flex flex-col items-center gap-3 transition-all duration-700 ease-in-out opacity-100 text-center"
+        class="mb-6 flex flex-col items-center gap-3 transition-all duration-700 ease-in-out opacity-100 text-center text__color"
       >
         <p class="text-xl font-semibold bg-gray-100 rounded px-4 py-2">
           🎉 Interest:
@@ -53,7 +53,7 @@
         <p>⏳ Enter the required values to calculate simple interest!</p>
       </div>
 
-      <div class="mb-6">
+      <div class="mb-6 text__color">
         <label class="block text-lg font-medium mb-2"
           >💵 Principal Amount:</label
         >
@@ -144,7 +144,7 @@
     *ngIf="simpleInterestResult && !errorMessage && !isLoading"
     class="w-full shadow-md rounded-lg p-6 border"
   >
-    <h4 class="text-2xl font-bold mb-4 text-center text-blue-600">
+    <h4 class="text-2xl font-bold mb-4 text-center title__color">
       📖 How Simple Interest is Calculated
     </h4>
 
@@ -162,30 +162,26 @@
 
     <ul class="list-inside list-disc pl-6 text-gray-700 mb-4">
       <li>
-        <strong class="text-blue-600">P</strong> = Principal amount (Loan
-        amount) 💰
+        <strong class="title__color">P</strong> = Principal amount (Loan amount)
+        💰
       </li>
       <li>
-        <strong class="text-blue-600">R</strong> = Rate of interest per year 📊
+        <strong class="title__color">R</strong> = Rate of interest per year 📊
       </li>
-      <li>
-        <strong class="text-blue-600">T</strong> = Time period in years ⏳
-      </li>
+      <li><strong class="title__color">T</strong> = Time period in years ⏳</li>
     </ul>
 
-    <p class="text-lg font-bold text-blue-700 mt-4 mb-4">
-      Based on your input:
-    </p>
+    <p class="text-lg font-bold title__color mt-4 mb-4">Based on your input:</p>
 
     <ul class="list-inside list-decimal pl-6 text-gray-700 mb-4">
       <li>
-        Principal (<strong class="text-blue-600">P</strong>) = ₹{{
+        Principal (<strong class="title__color">P</strong>) = ₹{{
           principalAmount | number
         }}
         💵
       </li>
       <li>
-        Interest rate (<strong class="text-blue-600">R</strong>):<br />
+        Interest rate (<strong class="title__color">R</strong>):<br />
         <span class="ml-2 block"
           >• {{ rateOfInterest }}% per {{ interestUnit }}</span
         >
@@ -196,16 +192,14 @@
         </ul>
       </li>
       <li>
-        Time (<strong class="text-blue-600">T</strong>) = {{ time }}
+        Time (<strong class="title__color">T</strong>) = {{ time }}
         {{ timeUnit }} ⏰
       </li>
     </ul>
 
     <!-- Breakdown Card -->
-    <div
-      class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg shadow-sm"
-    >
-      <h5 class="text-lg font-bold text-blue-700 mb-2">
+    <div class="mt-6 p-4 custom_container border rounded-lg shadow-sm">
+      <h5 class="text-lg font-bold title__color mb-2">
         📊 Interest Overview Based on Your Inputs
       </h5>
       <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -213,7 +207,7 @@
           class="border rounded shadow p-3"
           *ngFor="let breakdown of getConvertedInterestBreakdown()"
         >
-          <h6 class="font-semibold text-blue-600 mb-1">
+          <h6 class="font-semibold title__color mb-1">
             💰 {{ breakdown.unit | titlecase }} Basis
           </h6>
           <p class="text-gray-700 text-sm">
