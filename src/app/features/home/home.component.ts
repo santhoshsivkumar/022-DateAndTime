@@ -58,6 +58,26 @@ export class HomeComponent {
       route: '/simple-interest',
       section: 'Math & Finance Tools',
     },
+    {
+      title: 'Compound Interest Calculator',
+      route: '/compound-interest',
+      section: 'Math & Finance Tools',
+    },
+    {
+      title: 'Loan EMI Calculator',
+      route: '/loan-emi-calculator',
+      section: 'Math & Finance Tools',
+    },
+    {
+      title: 'Percentage Calculator',
+      route: '/percentage-calculator',
+      section: 'Math & Finance Tools',
+    },
+    {
+      title: 'Number Base Converter',
+      route: '/number-base-converter',
+      section: 'Utilities',
+    },
   ];
 
   get groupedFeatures(): { [section: string]: Feature[] } {

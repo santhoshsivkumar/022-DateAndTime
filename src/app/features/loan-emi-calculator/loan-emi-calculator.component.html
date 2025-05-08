@@ -1,0 +1,74 @@
+<div class="container mx-auto lg:p-4 p-0 flex flex-col justify-center gap-8">
+  <div class="p-4 flex flex-col justify-center lg:flex-row gap-8">
+    <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 border">
+      <h2
+        class="text-3xl font-bold mb-6 text-center"
+        [style.color]="'var(--font-color)'"
+      >
+        💰 Loan EMI Calculator
+      </h2>
+
+      <div
+        *ngIf="emiResult"
+        class="mb-6 flex flex-col items-center gap-3 text-center"
+      >
+        <p class="text-xl font-semibold bg-gray-100 rounded px-4 py-2">
+          🎉 EMI: <span class="font-bold">{{ emiResult.emi }}</span>
+        </p>
+        <p class="text-lg">📆 Total Payment: {{ emiResult.totalPayment }}</p>
+        <p class="text-lg">📊 Total Interest: {{ emiResult.totalInterest }}</p>
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-lg font-medium mb-2">💵 Loan Amount:</label>
+        <input
+          type="number"
+          [(ngModel)]="loanAmount"
+          class="border p-3 rounded w-full text-lg"
+          placeholder="Enter loan amount"
+        />
+
+        <label class="block text-lg font-medium mb-2 mt-4"
+          >📆 Loan Tenure (Years):</label
+        >
+        <input
+          type="number"
+          [(ngModel)]="loanTenure"
+          class="border p-3 rounded w-full text-lg"
+          placeholder="Enter loan tenure"
+        />
+
+        <label class="block text-lg font-medium mb-2 mt-4"
+          >💹 Annual Interest Rate:</label
+        >
+        <input
+          type="number"
+          [(ngModel)]="annualInterestRate"
+          class="border p-3 rounded w-full text-lg"
+          placeholder="Enter annual interest rate"
+        />
+      </div>
+
+      <button
+        (click)="calculateEMI()"
+        class="w-full text-lg font-semibold px-6 py-3 rounded button"
+      >
+        🧮 Calculate EMI
+      </button>
+    </div>
+
+    <div class="w-full lg:w-1/2 p-6 border shadow-md rounded-lg text__color">
+      <h3 class="text-2xl font-semibold mb-4 title__color">📚 Key Facts About EMI</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li>EMI stands for Equated Monthly Installment.</li>
+        <li>It includes both principal and interest components.</li>
+        <li>
+          Formula:
+          <strong
+            >[P × r × (1 + r)<sup>n</sup>] / [(1 + r)<sup>n</sup> - 1]</strong
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

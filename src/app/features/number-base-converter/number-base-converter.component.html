@@ -1,0 +1,78 @@
+<div class="container mx-auto lg:p-4 p-0 flex flex-col justify-center gap-8">
+  <div class="p-4 flex flex-col justify-center lg:flex-row gap-8">
+    <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 border">
+      <h2
+        class="text-3xl font-bold mb-6 text-center"
+        [style.color]="'var(--font-color)'"
+      >
+        🔢 Number Base Converter
+      </h2>
+
+      <div
+        *ngIf="convertedNumber"
+        class="mb-6 flex flex-col items-center gap-3 text-center"
+      >
+        <p class="text-xl font-semibold bg-gray-100 rounded px-4 py-2">
+          🎉 Converted Number:
+          <span class="font-bold">{{ convertedNumber }}</span>
+        </p>
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-lg font-medium mb-2">🔢 Input Number:</label>
+        <input
+          type="text"
+          [(ngModel)]="inputNumber"
+          class="border p-3 rounded w-full text-lg"
+          placeholder="Enter number"
+        />
+
+        <label class="block text-lg font-medium mb-2 mt-4"
+          >📥 Input Base:</label
+        >
+        <input
+          type="number"
+          [(ngModel)]="inputBase"
+          class="border p-3 rounded w-full text-lg"
+          placeholder="Enter input base (e.g., 2, 10, 16)"
+        />
+
+        <label class="block text-lg font-medium mb-2 mt-4"
+          >📤 Output Base:</label
+        >
+        <input
+          type="number"
+          [(ngModel)]="outputBase"
+          class="border p-3 rounded w-full text-lg"
+          placeholder="Enter output base (e.g., 2, 10, 16)"
+        />
+      </div>
+
+      <button
+        (click)="convertNumber()"
+        class="w-full text-lg font-semibold px-6 py-3 rounded button"
+      >
+        🔄 Convert Number
+      </button>
+    </div>
+
+    <div class="w-full lg:w-1/2 p-6 border shadow-md rounded-lg text__color">
+      <h3 class="text-2xl font-semibold mb-4 title__color">
+        📚 Key Facts About Number Bases
+      </h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li>
+          Number bases determine how numbers are represented (e.g., binary,
+          decimal, hexadecimal).
+        </li>
+        <li>
+          Common bases include 2 (binary), 10 (decimal), and 16 (hexadecimal).
+        </li>
+        <li>
+          Conversion involves interpreting the number in one base and
+          re-expressing it in another.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
