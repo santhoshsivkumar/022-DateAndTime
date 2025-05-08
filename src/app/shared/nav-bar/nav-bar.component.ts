@@ -7,12 +7,12 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [RouterModule, CommonModule],
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css']
+  styleUrls: ['./nav-bar.component.css'],
 })
 export class NavBarComponent {
   links = [
     { path: '', label: 'Home' },
     { path: '/calculate-age', label: 'Calculate Age' },
-    { path: '/days-between', label: 'Days Between Dates' }
+    { path: '/days-between', label: 'Days Between Dates' },
   ];
 }

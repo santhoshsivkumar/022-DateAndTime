@@ -1,0 +1,4 @@
+.feature_cards {
+  background-color: color-mix(in srgb, var(--text-color) 10%, #fff);
+  border: 2px solid var(--text-color);
+}

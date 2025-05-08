@@ -1,19 +1,25 @@
 <nav
-  [style.backgroundColor]="'var(--header-color)'"
-  [style.color]="'var(--title-color)'"
-  class="p-4"
+  class="p-4 relative border-b"
+  [style.background]="'var(--header-color)'"
+  [style.borderBottom]="'2px solid var(--text-color)'"
 >
   <div class="container mx-auto flex justify-between items-center">
-    <a class="text-2xl font-bold" routerLink="/" aria-label="Home">ToolBox</a>
+    <a
+      class="text-2xl font-bold"
+      routerLink="/"
+      aria-label="Home"
+      [style.color]="'var(--text-color)'"
+      >ToolBox</a
+    >
     <ul class="flex space-x-4">
       <li *ngFor="let link of links">
         <a
           [routerLink]="link.path"
-          class="hover:underline"
-          [style.color]="'var(--text-color)'"
+          [style.color]="'var(--title-color)'"
           [attr.aria-label]="link.label"
-          >{{ link.label }}</a
         >
+          {{ link.label }}
+        </a>
       </li>
     </ul>
   </div>
