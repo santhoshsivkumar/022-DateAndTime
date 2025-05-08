@@ -1,0 +1,73 @@
+<div class="container mx-auto lg:p-4 p-0 flex flex-col justify-center gap-8">
+  <div class="p-4 flex flex-col justify-center lg:flex-row gap-8">
+    <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 border">
+      <h2 class="text-3xl font-bold mb-6 text-center title__color">
+        CSV to JSON Converter
+      </h2>
+      <form (ngSubmit)="convert()" class="flex flex-col gap-4">
+        <label class="block text-lg font-medium mb-2" for="inputCsv"
+          >Paste CSV:</label
+        >
+        <textarea
+          id="inputCsv"
+          [(ngModel)]="inputCsv"
+          name="inputCsv"
+          rows="6"
+          class="border border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        ></textarea>
+        <button
+          type="submit"
+          class="w-full text-lg font-semibold px-6 button py-3 rounded button transition"
+        >
+          Convert
+        </button>
+      </form>
+      <div *ngIf="outputJson" class="mt-6">
+        <h3 class="text-xl font-semibold mb-2">JSON Output:</h3>
+        <div class="w-full flex flex-col gap-2">
+          <textarea
+            readonly
+            rows="8"
+            class="border border-gray-300 p-3 rounded w-full text-base font-mono overflow-x-auto"
+            style="min-height: 120px; max-height: 350px; resize: vertical"
+            >{{ outputJson }}</textarea
+          >
+          <button
+            (click)="copyOutput()"
+            type="button"
+            class="w-full text-base font-semibold px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition"
+          >
+            Copy to Clipboard
+          </button>
+        </div>
+      </div>
+      <div *ngIf="errorMsg" class="text-red-500 mt-4 text-center">
+        <strong>Error:</strong> {{ errorMsg }}
+      </div>
+    </div>
+    <div class="w-full lg:w-1/2 p-6 border shadow-md rounded-lg text__color">
+      <h3 class="text-2xl font-semibold mb-4 title__color">
+        📚 About CSV to JSON
+      </h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li>
+          Splits CSV into header and rows, then maps each row to a JSON object.
+        </li>
+        <li>Assumes simple CSV (no quoted commas or multiline fields).</li>
+      </ul>
+      <h4 class="mt-4 font-semibold">Tips</h4>
+      <ul class="list-disc list-inside space-y-2">
+        <li>Headers must match the number of columns in each row.</li>
+        <li>For complex CSV, use a dedicated parser.</li>
+      </ul>
+    </div>
+  </div>
+  <div *ngIf="breakdown.length" class="w-full shadow-md rounded-lg p-6 border">
+    <h4 class="text-2xl font-bold mb-4 text-center title__color">
+      📖 Breakdown
+    </h4>
+    <ul class="list-inside list-decimal pl-6 text-gray-700 mb-4">
+      <li *ngFor="let step of breakdown">{{ step }}</li>
+    </ul>
+  </div>
+</div>

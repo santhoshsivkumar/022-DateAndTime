@@ -1,0 +1,84 @@
+<div class="container mx-auto lg:p-4 p-0 flex flex-col justify-center gap-8">
+  <div class="p-4 flex flex-col justify-center lg:flex-row gap-8">
+    <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 border">
+      <h2 class="text-3xl font-bold mb-6 text-center title__color">
+        Custom Calendar Generator
+      </h2>
+      <form (ngSubmit)="generate()" class="flex flex-col gap-4">
+        <label class="block text-lg font-medium mb-2" for="year">Year:</label>
+        <input
+          id="year"
+          type="number"
+          [(ngModel)]="year"
+          name="year"
+          min="1900"
+          max="2100"
+          class="border border-gray-300 p-2 rounded w-full text-lg"
+        />
+        <label class="block text-lg font-medium mb-2" for="month">Month:</label>
+        <select
+          id="month"
+          [(ngModel)]="month"
+          name="month"
+          class="border border-gray-300 p-2 rounded w-full text-lg"
+        >
+          <option *ngFor="let m of monthNames; let i = index" [value]="i + 1">
+            {{ m }}
+          </option>
+        </select>
+        <button
+          type="submit"
+          class="w-full text-lg font-semibold px-6 button py-3 rounded button transition"
+        >
+          Generate
+        </button>
+      </form>
+      <div *ngIf="calendar.length" class="mt-6">
+        <h3 class="text-xl font-semibold mb-2">
+          {{ monthNames[month - 1] }} {{ year }}
+        </h3>
+        <table class="calendar-table w-full border-collapse mt-2">
+          <thead>
+            <tr>
+              <th class="border p-2">Sun</th>
+              <th class="border p-2">Mon</th>
+              <th class="border p-2">Tue</th>
+              <th class="border p-2">Wed</th>
+              <th class="border p-2">Thu</th>
+              <th class="border p-2">Fri</th>
+              <th class="border p-2">Sat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let week of calendar">
+              <td *ngFor="let day of week" class="border p-2 text-center">
+                {{ day }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="w-full lg:w-1/2 p-6 border shadow-md rounded-lg text__color">
+      <h3 class="text-2xl font-semibold mb-4 title__color">
+        📚 About Custom Calendar
+      </h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li>Generates a calendar for any month and year.</li>
+        <li>Calculates the first day and number of days in the month.</li>
+      </ul>
+      <h4 class="mt-4 font-semibold">Tips</h4>
+      <ul class="list-disc list-inside space-y-2">
+        <li>Use for planning, scheduling, or printing custom calendars.</li>
+      </ul>
+    </div>
+  </div>
+  <div *ngIf="calendar.length" class="w-full shadow-md rounded-lg p-6 border">
+    <h4 class="text-2xl font-bold mb-4 text-center title__color">
+      📖 Breakdown
+    </h4>
+    <ul class="list-inside list-decimal pl-6 text-gray-700 mb-4">
+      <li *ngFor="let step of breakdown">{{ step }}</li>
+    </ul>
+  </div>
+</div>

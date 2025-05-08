@@ -1,0 +1,91 @@
+<div class="container mx-auto lg:p-4 p-0 flex flex-col justify-center gap-8">
+  <div class="p-4 flex flex-col justify-center lg:flex-row gap-8">
+    <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 border">
+      <h2
+        class="text-3xl font-bold mb-6 text-center"
+        [style.color]="'var(--font-color)'"
+      >
+        <!-- Calculator Title -->Time Zone Converter
+      </h2>
+      <div
+        *ngIf="result && !errorMessage && !isLoading"
+        class="mb-6 flex flex-col items-center gap-3 transition-all duration-700 ease-in-out opacity-100 text-center text__color"
+      >
+        <p class="text-xl font-semibold bg-gray-100 rounded px-4 py-2">
+          Converted Time: <span class="font-bold">{{ result }}</span>
+        </p>
+      </div>
+      <div
+        *ngIf="!result && !errorMessage && !isLoading"
+        class="text-center mb-6 text-lg font-medium text-gray-600"
+      >
+        <p>⏳ Enter a date/time and select time zones to convert!</p>
+      </div>
+      <div class="mb-6 text__color">
+        <label class="block text-lg font-medium mb-2">Date & Time:</label>
+        <input
+          type="datetime-local"
+          [(ngModel)]="dateTime"
+          class="border border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+        <label class="block text-lg font-medium mb-2 mt-4"
+          >From Time Zone:</label
+        >
+        <select
+          [(ngModel)]="fromTz"
+          class="border border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        >
+          <option *ngFor="let tz of timezones" [value]="tz.value">
+            {{ tz.label }}
+          </option>
+        </select>
+        <label class="block text-lg font-medium mb-2 mt-4">To Time Zone:</label>
+        <select
+          [(ngModel)]="toTz"
+          class="border border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        >
+          <option *ngFor="let tz of timezones" [value]="tz.value">
+            {{ tz.label }}
+          </option>
+        </select>
+      </div>
+      <button
+        (click)="convertTimezone()"
+        class="w-full text-lg font-semibold px-6 button py-3 rounded button transition"
+      >
+        Convert
+      </button>
+      <div *ngIf="errorMessage" class="text-red-500 mt-4 text-center">
+        <p>🚫 {{ errorMessage }}</p>
+      </div>
+    </div>
+    <div class="w-full lg:w-1/2 p-6 border shadow-md rounded-lg text__color">
+      <h3 class="text-2xl font-semibold mb-4 title__color">
+        📚 About Time Zones
+      </h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li>Time zones are regions with the same standard time.</li>
+        <li>Offsets are measured from UTC (Coordinated Universal Time).</li>
+        <li>This tool converts between common world time zones.</li>
+        <li>
+          Formula: UTC = Local Time - Offset; Target = UTC + Target Offset
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div
+    *ngIf="result && !errorMessage && !isLoading"
+    class="w-full shadow-md rounded-lg p-6 border"
+  >
+    <h4 class="text-2xl font-bold mb-4 text-center title__color">
+      📖 How Time Zone Conversion Works
+    </h4>
+    <p class="text-base text-gray-700 mb-4">
+      The conversion is done by converting the input time to UTC, then to the
+      target time zone using the respective offsets.
+    </p>
+    <ul class="list-inside list-decimal pl-6 text-gray-700 mb-4">
+      <li *ngFor="let step of breakdown">{{ step }}</li>
+    </ul>
+  </div>
+</div>

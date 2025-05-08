@@ -1,0 +1,93 @@
+<div class="container mx-auto lg:p-4 p-0 flex flex-col justify-center gap-8">
+  <div class="p-4 flex flex-col justify-center lg:flex-row gap-8">
+    <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 border">
+      <h2
+        class="text-3xl font-bold mb-6 text-center"
+        [style.color]="'var(--font-color)'"
+      >
+        <!-- Calculator Title -->Text Encryption/Decryption
+      </h2>
+      <div
+        *ngIf="output && !errorMessage && !isLoading"
+        class="mb-6 flex flex-col items-center gap-3 transition-all duration-700 ease-in-out opacity-100 text-center text__color"
+      >
+        <p class="text-xl font-semibold bg-gray-100 rounded px-4 py-2">
+          Result: <span class="font-bold">{{ output }}</span>
+        </p>
+      </div>
+      <div
+        *ngIf="!output && !errorMessage && !isLoading"
+        class="text-center mb-6 text-lg font-medium text-gray-600"
+      >
+        <p>⏳ Enter text and select mode to encrypt or decrypt!</p>
+      </div>
+      <div class="mb-6 text__color">
+        <label class="block text-lg font-medium mb-2">Text:</label>
+        <textarea
+          [(ngModel)]="input"
+          rows="3"
+          class="border border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder="Enter text"
+        ></textarea>
+        <div class="flex gap-2 mt-2">
+          <label
+            ><input type="radio" [(ngModel)]="mode" value="encrypt" />
+            Encrypt</label
+          >
+          <label
+            ><input type="radio" [(ngModel)]="mode" value="decrypt" />
+            Decrypt</label
+          >
+        </div>
+        <label class="block text-lg font-medium mb-2 mt-4"
+          >Shift (for Caesar cipher):</label
+        >
+        <input
+          type="number"
+          [(ngModel)]="shift"
+          min="1"
+          max="25"
+          class="border border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+      </div>
+      <button
+        (click)="process()"
+        class="w-full text-lg font-semibold px-6 button py-3 rounded button transition"
+      >
+        Process
+      </button>
+      <div *ngIf="errorMessage" class="text-red-500 mt-4 text-center">
+        <p>🚫 {{ errorMessage }}</p>
+      </div>
+    </div>
+    <div class="w-full lg:w-1/2 p-6 border shadow-md rounded-lg text__color">
+      <h3 class="text-2xl font-semibold mb-4 title__color">
+        📚 About Simple Encryption
+      </h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li>
+          This tool uses a Caesar cipher for demonstration (not secure for real
+          use).
+        </li>
+        <li>Each letter is shifted by a fixed number of positions.</li>
+        <li>Decryption reverses the shift to recover the original text.</li>
+        <li>For real security, use modern cryptographic algorithms.</li>
+      </ul>
+    </div>
+  </div>
+  <div
+    *ngIf="output && !errorMessage && !isLoading"
+    class="w-full shadow-md rounded-lg p-6 border"
+  >
+    <h4 class="text-2xl font-bold mb-4 text-center title__color">
+      📖 How the Caesar Cipher Works
+    </h4>
+    <p class="text-base text-gray-700 mb-4">
+      The Caesar cipher shifts each letter in your text by a fixed number of
+      positions in the alphabet.
+    </p>
+    <ul class="list-inside list-decimal pl-6 text-gray-700 mb-4">
+      <li *ngFor="let step of breakdown">{{ step }}</li>
+    </ul>
+  </div>
+</div>

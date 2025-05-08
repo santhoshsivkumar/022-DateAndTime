@@ -1,0 +1,95 @@
+<div class="container mx-auto lg:p-4 p-0 flex flex-col justify-center gap-8">
+  <div class="p-4 flex flex-col justify-center lg:flex-row gap-8">
+    <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 border">
+      <h2
+        class="text-3xl font-bold mb-6 text-center"
+        [style.color]="'var(--font-color)'"
+      >
+        <!-- Calculator Title -->Base64 Encoder/Decoder
+      </h2>
+      <div
+        *ngIf="output && !errorMessage && !isLoading"
+        class="mb-6 flex flex-col items-center gap-3 transition-all duration-700 ease-in-out opacity-100 text-center text__color"
+      >
+        <label
+          class="text-xl font-semibold bg-gray-100 rounded px-4 py-2 w-full text-left"
+          >Result:</label
+        >
+        <div class="w-full flex flex-col gap-2">
+          <textarea
+            readonly
+            rows="6"
+            class="border border-gray-300 p-3 rounded w-full text-base font-mono overflow-x-auto"
+            style="min-height: 120px; max-height: 300px; resize: vertical"
+            >{{ output }}</textarea
+          >
+          <button
+            (click)="copyOutput()"
+            type="button"
+            class="w-full text-base font-semibold px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition"
+          >
+            Copy to Clipboard
+          </button>
+        </div>
+      </div>
+      <div
+        *ngIf="!output && !errorMessage && !isLoading"
+        class="text-center mb-6 text-lg font-medium text-gray-600"
+      >
+        <p>⏳ Enter text and select mode to encode or decode Base64!</p>
+      </div>
+      <div class="mb-6 text__color">
+        <label class="block text-lg font-medium mb-2">Text/Base64:</label>
+        <textarea
+          [(ngModel)]="input"
+          rows="3"
+          class="border border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder="Enter text or Base64"
+        ></textarea>
+        <div class="flex gap-2 mt-2">
+          <label
+            ><input type="radio" [(ngModel)]="mode" value="encode" />
+            Encode</label
+          >
+          <label
+            ><input type="radio" [(ngModel)]="mode" value="decode" />
+            Decode</label
+          >
+        </div>
+      </div>
+      <button
+        (click)="process()"
+        class="w-full text-lg font-semibold px-6 button py-3 rounded button transition"
+      >
+        Process
+      </button>
+      <div *ngIf="errorMessage" class="text-red-500 mt-4 text-center">
+        <p>🚫 {{ errorMessage }}</p>
+      </div>
+    </div>
+    <div class="w-full lg:w-1/2 p-6 border shadow-md rounded-lg text__color">
+      <h3 class="text-2xl font-semibold mb-4 title__color">📚 About Base64</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li>Base64 encodes binary data as ASCII text using 64 characters.</li>
+        <li>Commonly used for data transfer in email, URLs, and web APIs.</li>
+        <li>Decoding reverses the process to recover the original data.</li>
+        <li>Not encryption—just encoding for safe transport.</li>
+      </ul>
+    </div>
+  </div>
+  <div
+    *ngIf="output && !errorMessage && !isLoading"
+    class="w-full shadow-md rounded-lg p-6 border"
+  >
+    <h4 class="text-2xl font-bold mb-4 text-center title__color">
+      📖 How Base64 Works
+    </h4>
+    <p class="text-base text-gray-700 mb-4">
+      Base64 converts binary data to a string using a set of 64 characters,
+      making it safe for text-based protocols.
+    </p>
+    <ul class="list-inside list-decimal pl-6 text-gray-700 mb-4">
+      <li *ngFor="let step of breakdown">{{ step }}</li>
+    </ul>
+  </div>
+</div>

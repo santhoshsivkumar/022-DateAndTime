@@ -1,0 +1,83 @@
+<div class="container mx-auto lg:p-4 p-0 flex flex-col justify-center gap-8">
+  <div class="p-4 flex flex-col justify-center lg:flex-row gap-8">
+    <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 border">
+      <h2 class="text-3xl font-bold mb-6 text-center title__color">
+        Color Picker & HEX to RGB Converter
+      </h2>
+      <form (ngSubmit)="convert()" class="flex flex-col gap-4">
+        <label class="block text-lg font-medium mb-2" for="hex"
+          >HEX Color:</label
+        >
+        <div class="flex items-center gap-4">
+          <input
+            id="hex"
+            type="color"
+            [(ngModel)]="hex"
+            name="hex"
+            class="w-12 h-12 border rounded"
+          />
+          <input
+            type="text"
+            [(ngModel)]="hex"
+            name="hexText"
+            maxlength="7"
+            class="border border-gray-300 p-2 rounded text-lg w-32"
+          />
+        </div>
+        <button
+          type="submit"
+          class="w-full text-lg font-semibold px-6 button py-3 rounded button transition"
+        >
+          Convert
+        </button>
+      </form>
+      <div
+        *ngIf="rgb"
+        class="mt-6 flex items-center gap-4 flex-col sm:flex-row"
+      >
+        <h3 class="text-xl font-semibold mb-2">RGB Value:</h3>
+        <div class="w-full flex flex-col gap-2">
+          <input
+            type="text"
+            [value]="rgb"
+            readonly
+            class="border border-gray-300 p-2 rounded text-lg w-full font-mono"
+            style="min-width: 120px; max-width: 350px"
+          />
+          <button
+            (click)="copyOutput()"
+            type="button"
+            class="w-full text-base font-semibold px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition"
+          >
+            Copy to Clipboard
+          </button>
+        </div>
+        <div class="color-preview" [style.background]="hex"></div>
+      </div>
+    </div>
+    <div class="w-full lg:w-1/2 p-6 border shadow-md rounded-lg text__color">
+      <h3 class="text-2xl font-semibold mb-4 title__color">
+        📚 About HEX & RGB
+      </h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li>Pick a color or enter a HEX code to see its RGB equivalent.</li>
+        <li>HEX is a base-16 color code, RGB is Red-Green-Blue values.</li>
+      </ul>
+      <h4 class="mt-4 font-semibold">Tips</h4>
+      <ul class="list-disc list-inside space-y-2">
+        <li>
+          HEX codes start with # and are 3 or 6 digits (e.g., #fff or #3498db).
+        </li>
+        <li>Use for web design, CSS, and digital graphics.</li>
+      </ul>
+    </div>
+  </div>
+  <div *ngIf="rgb" class="w-full shadow-md rounded-lg p-6 border">
+    <h4 class="text-2xl font-bold mb-4 text-center title__color">
+      📖 Breakdown
+    </h4>
+    <ul class="list-inside list-decimal pl-6 text-gray-700 mb-4">
+      <li *ngFor="let step of breakdown">{{ step }}</li>
+    </ul>
+  </div>
+</div>

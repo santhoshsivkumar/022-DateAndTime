@@ -1,0 +1,76 @@
+<div class="container mx-auto lg:p-4 p-0 flex flex-col justify-center gap-8">
+  <div class="p-4 flex flex-col justify-center lg:flex-row gap-8">
+    <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 border">
+      <h2 class="text-3xl font-bold mb-6 text-center title__color">
+        Remove Line Breaks / Spaces
+      </h2>
+      <form (ngSubmit)="process()" class="flex flex-col gap-4">
+        <label class="block text-lg font-medium mb-2" for="inputText"
+          >Input Text:</label
+        >
+        <textarea
+          id="inputText"
+          [(ngModel)]="inputText"
+          name="inputText"
+          rows="5"
+          class="border border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        ></textarea>
+        <label class="block text-lg font-medium mb-2">Remove:</label>
+        <select
+          [(ngModel)]="removeType"
+          name="removeType"
+          class="border border-gray-300 p-2 rounded w-full text-lg"
+        >
+          <option value="linebreaks">Line Breaks</option>
+          <option value="spaces">Spaces</option>
+          <option value="both">Both</option>
+        </select>
+        <button
+          type="submit"
+          class="w-full text-lg font-semibold px-6 button py-3 rounded button transition"
+        >
+          Process
+        </button>
+      </form>
+      <div *ngIf="outputText" class="mt-6">
+        <h3 class="text-xl font-semibold mb-2">Output:</h3>
+        <textarea
+          readonly
+          rows="5"
+          class="border border-gray-300 p-3 rounded w-full text-lg"
+          >{{ outputText }}</textarea
+        >
+      </div>
+    </div>
+    <div class="w-full lg:w-1/2 p-6 border shadow-md rounded-lg text__color">
+      <h3 class="text-2xl font-semibold mb-4 title__color">
+        📚 About Removing Line Breaks/Spaces
+      </h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong>Line Breaks:</strong> Removes all newlines (\n, \r).</li>
+        <li>
+          <strong>Spaces:</strong> Removes all whitespace (spaces, tabs, etc.).
+        </li>
+        <li>
+          <strong>Both:</strong> Removes both line breaks and all whitespace.
+        </li>
+      </ul>
+      <h4 class="mt-4 font-semibold">Tips</h4>
+      <ul class="list-disc list-inside space-y-2">
+        <li>
+          Useful for minifying text or preparing data for single-line input
+          fields.
+        </li>
+        <li>Be careful: removing all spaces can make text unreadable.</li>
+      </ul>
+    </div>
+  </div>
+  <div *ngIf="outputText" class="w-full shadow-md rounded-lg p-6 border">
+    <h4 class="text-2xl font-bold mb-4 text-center title__color">
+      📖 Breakdown
+    </h4>
+    <ul class="list-inside list-decimal pl-6 text-gray-700 mb-4">
+      <li *ngFor="let step of breakdown">{{ step }}</li>
+    </ul>
+  </div>
+</div>

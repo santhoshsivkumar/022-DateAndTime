@@ -1,0 +1,120 @@
+<div class="container mx-auto lg:p-4 p-0 flex flex-col justify-center gap-8">
+  <div class="p-4 flex flex-col justify-center lg:flex-row gap-8">
+    <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 border">
+      <h2 class="text-3xl font-bold mb-6 text-center title__color">
+        XML ⇄ Base64 Converter
+      </h2>
+      <form (ngSubmit)="process()" class="flex flex-col gap-4">
+        <label class="block text-lg font-medium mb-2">XML or Base64:</label>
+        <textarea
+          [(ngModel)]="input"
+          name="input"
+          rows="6"
+          class="border text__color border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder="Enter XML or Base64"
+        ></textarea>
+        <div class="flex gap-2 mt-2">
+          <label>
+            <input
+              type="radio"
+              [(ngModel)]="mode"
+              value="xml-to-base64"
+              name="mode"
+            />
+            XML → Base64
+          </label>
+          <label>
+            <input
+              type="radio"
+              [(ngModel)]="mode"
+              value="base64-to-xml"
+              name="mode"
+            />
+            Base64 → XML
+          </label>
+        </div>
+        <button
+          type="submit"
+          class="w-full text-lg font-semibold px-6 button py-3 rounded button transition"
+        >
+          Convert
+        </button>
+      </form>
+      <div
+        *ngIf="output && !errorMessage && !isLoading"
+        class="mt-6 flex flex-col gap-2"
+      >
+        <h3 class="text-xl font-semibold mb-2">Result:</h3>
+        <ng-container *ngIf="isXmlOutput; else base64Output">
+          <pre
+            class="border-gray-300 p-3 rounded w-full text-base font-mono overflow-x-auto"
+            style="
+              min-height: 120px;
+              max-height: 350px;
+              resize: vertical;
+              white-space: pre-wrap;
+            "
+            >{{ output }}</pre
+          >
+        </ng-container>
+        <ng-template #base64Output>
+          <textarea
+            readonly
+            rows="8"
+            class="text__color border border-gray-300 p-3 rounded w-full text-base font-mono overflow-x-auto"
+            style="min-height: 120px; max-height: 350px; resize: vertical"
+            >{{ output }}</textarea
+          >
+        </ng-template>
+        <button
+          (click)="copyOutput()"
+          type="button"
+          class="w-full text-base font-semibold px-4 py-2 rounded text-white button transition"
+        >
+          Copy to Clipboard
+        </button>
+      </div>
+      <div *ngIf="errorMessage" class="text-red-500 mt-4 text-center">
+        <p>🚫 {{ errorMessage }}</p>
+      </div>
+    </div>
+    <div class="w-full lg:w-1/2 p-6 border shadow-md rounded-lg text__color">
+      <h3 class="text-2xl font-semibold mb-4 title__color">
+        📚 About XML & Base64
+      </h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li>
+          Base64 encodes binary/text data as ASCII text using 64 characters.
+        </li>
+        <li>XML is a markup language for structured data.</li>
+        <li>Encoding XML as Base64 is useful for safe transport/storage.</li>
+        <li>Decoding recovers the original XML string.</li>
+      </ul>
+      <h4 class="mt-4 font-semibold">Tips</h4>
+      <ul class="list-disc list-inside space-y-2">
+        <li>Base64 is not encryption—just encoding for safe transport.</li>
+        <li>Large XML files may produce very large Base64 strings.</li>
+      </ul>
+    </div>
+  </div>
+  <div
+    *ngIf="output && !errorMessage && !isLoading"
+    class="w-full shadow-md rounded-lg p-6 border from-gray-50 to-gray-100"
+  >
+    <h4 class="text-2xl font-bold mb-4 text-center title__color">
+      📖 How Conversion Works
+    </h4>
+    <ul
+      class="pl-6 text__color mb-4 space-y-3 overflow-x-auto overflow-y-auto rounded-lg border border-gray-200 shadow-inner p-4"
+      style="word-break: break-word; white-space: pre-wrap"
+    >
+      <li
+        *ngFor="let step of breakdown"
+        class="rounded px-3 py-2 custom_container text-base font-mono shadow-sm"
+        style="word-break: break-word; white-space: pre-wrap"
+      >
+        {{ step }}
+      </li>
+    </ul>
+  </div>
+</div>

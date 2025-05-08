@@ -48,6 +48,31 @@ export class HomeComponent {
       section: 'Date & Time Tools',
     },
     {
+      title: 'Workdays (Business Days) Calculator',
+      route: '/workdays-calculator',
+      section: 'Date & Time Tools',
+    },
+    {
+      title: 'Leap Year Checker',
+      route: '/leap-year-checker',
+      section: 'Date & Time Tools',
+    },
+    {
+      title: 'Zodiac Sign Finder',
+      route: '/zodiac-sign-finder',
+      section: 'Date & Time Tools',
+    },
+    {
+      title: 'Countdown Timer',
+      route: '/countdown-timer',
+      section: 'Date & Time Tools',
+    },
+    {
+      title: 'Time Zone Converter',
+      route: '/timezone-converter',
+      section: 'Date & Time Tools',
+    },
+    {
       title: 'Random Password Generator',
       route: '/password-generator',
       section: 'Utilities',
@@ -77,6 +102,101 @@ export class HomeComponent {
       title: 'Number Base Converter',
       route: '/number-base-converter',
       section: 'Utilities',
+    },
+    {
+      title: 'UUID Generator',
+      route: '/uuid-generator',
+      section: 'Security & Generator Tools',
+    },
+    {
+      title: 'QR Code Generator',
+      route: '/qr-code-generator',
+      section: 'Security & Generator Tools',
+    },
+    {
+      title: 'Base64 Encoder/Decoder',
+      route: '/base64-encoder-decoder',
+      section: 'Security & Generator Tools',
+    },
+    {
+      title: 'Hash Generator',
+      route: '/hash-generator',
+      section: 'Security & Generator Tools',
+    },
+    {
+      title: 'Text Encryption/Decryption',
+      route: '/text-encryption-decryption',
+      section: 'Security & Generator Tools',
+    },
+    {
+      title: 'XML ⇄ Base64 Converter',
+      route: '/security-generator-tools/xml-base64-converter',
+      section: 'Security & Generator Tools',
+    },
+    {
+      title: 'Unit Converter',
+      route: '/unit-converter',
+      section: 'Measurement & Conversion Tools',
+    },
+    {
+      title: 'Pixel to Rem Converter',
+      route: '/pixel-to-rem-converter',
+      section: 'Measurement & Conversion Tools',
+    },
+    {
+      title: 'Aspect Ratio Calculator',
+      route: '/aspect-ratio-calculator',
+      section: 'Measurement & Conversion Tools',
+    },
+    {
+      title: 'Screen Resolution Tester',
+      route: '/screen-resolution-tester',
+      section: 'Measurement & Conversion Tools',
+    },
+    {
+      title: 'Text Case Converter',
+      route: '/text-case-converter',
+      section: 'Text & Formatting Tools',
+    },
+    {
+      title: 'Word/Character Counter',
+      route: '/word-character-counter',
+      section: 'Text & Formatting Tools',
+    },
+    {
+      title: 'Remove Line Breaks/Spaces',
+      route: '/remove-linebreaks-spaces',
+      section: 'Text & Formatting Tools',
+    },
+    {
+      title: 'JSON Formatter & Validator',
+      route: '/json-formatter-validator',
+      section: 'Text & Formatting Tools',
+    },
+    {
+      title: 'CSV to JSON Converter',
+      route: '/csv-to-json-converter',
+      section: 'Text & Formatting Tools',
+    },
+    {
+      title: 'Lorem Ipsum Generator',
+      route: '/lorem-ipsum-generator',
+      section: 'Miscellaneous Tools',
+    },
+    {
+      title: 'Color Picker & HEX to RGB Converter',
+      route: '/color-picker-hex-rgb',
+      section: 'Miscellaneous Tools',
+    },
+    {
+      title: 'Timezone Clock',
+      route: '/timezone-clock',
+      section: 'Miscellaneous Tools',
+    },
+    {
+      title: 'Custom Calendar Generator',
+      route: '/custom-calendar-generator',
+      section: 'Miscellaneous Tools',
     },
   ];
 

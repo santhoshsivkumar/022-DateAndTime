@@ -7,8 +7,6 @@
 
 /*=============== VARIABLES CSS ===============*/
 :root {
-  user-select: none;
-
   /*========== Font and typography ==========*/
   --body-font: "Poppins", sans-serif;
 

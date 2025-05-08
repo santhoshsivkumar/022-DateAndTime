@@ -1,0 +1,73 @@
+<div class="container mx-auto lg:p-4 p-0 flex flex-col justify-center gap-8">
+  <div class="p-4 flex flex-col justify-center lg:flex-row gap-8">
+    <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 border">
+      <h2
+        class="text-3xl font-bold mb-6 text-center"
+        [style.color]="'var(--font-color)'"
+      >
+        <!-- Calculator Title -->Word/Character Counter
+      </h2>
+      <div
+        *ngIf="!errorMessage && (wordCount > 0 || charCount > 0) && !isLoading"
+        class="mb-6 flex flex-col items-center gap-3 transition-all duration-700 ease-in-out opacity-100 text-center text__color"
+      >
+        <p class="text-xl font-semibold bg-gray-100 rounded px-4 py-2">
+          Words: <span class="font-bold">{{ wordCount }}</span>
+        </p>
+        <p class="text-lg">Characters: {{ charCount }}</p>
+      </div>
+      <div
+        *ngIf="
+          !errorMessage && wordCount === 0 && charCount === 0 && !isLoading
+        "
+        class="text-center mb-6 text-lg font-medium text-gray-600"
+      >
+        <p>⏳ Enter text to count words and characters!</p>
+      </div>
+      <div class="mb-6 text__color">
+        <label class="block text-lg font-medium mb-2">Text:</label>
+        <textarea
+          [(ngModel)]="input"
+          rows="3"
+          class="border border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder="Enter text"
+        ></textarea>
+      </div>
+      <button
+        (click)="count()"
+        class="w-full text-lg font-semibold px-6 button py-3 rounded button transition"
+      >
+        Count
+      </button>
+      <div *ngIf="errorMessage" class="text-red-500 mt-4 text-center">
+        <p>🚫 {{ errorMessage }}</p>
+      </div>
+    </div>
+    <div class="w-full lg:w-1/2 p-6 border shadow-md rounded-lg text__color">
+      <h3 class="text-2xl font-semibold mb-4 title__color">
+        📚 About Word/Character Counting
+      </h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li>Counts the number of words and characters in your text.</li>
+        <li>Useful for writing, editing, and SEO.</li>
+        <li>Words are separated by spaces or punctuation.</li>
+        <li>Characters include all letters, numbers, and symbols.</li>
+      </ul>
+    </div>
+  </div>
+  <div
+    *ngIf="!errorMessage && (wordCount > 0 || charCount > 0) && !isLoading"
+    class="w-full shadow-md rounded-lg p-6 border"
+  >
+    <h4 class="text-2xl font-bold mb-4 text-center title__color">
+      📖 How Counting Works
+    </h4>
+    <p class="text-base text-gray-700 mb-4">
+      Words are counted by splitting the text on whitespace. Characters are
+      counted as all characters in the string.
+    </p>
+    <ul class="list-inside list-decimal pl-6 text-gray-700 mb-4">
+      <li *ngFor="let step of breakdown">{{ step }}</li>
+    </ul>
+  </div>
+</div>

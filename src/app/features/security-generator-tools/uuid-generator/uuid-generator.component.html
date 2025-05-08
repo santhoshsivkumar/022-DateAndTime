@@ -1,0 +1,71 @@
+<div class="container mx-auto lg:p-4 p-0 flex flex-col justify-center gap-8">
+  <div class="p-4 flex flex-col justify-center lg:flex-row gap-8">
+    <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 border">
+      <h2
+        class="text-3xl font-bold mb-6 text-center"
+        [style.color]="'var(--font-color)'"
+      >
+        <!-- Calculator Title -->UUID Generator
+      </h2>
+      <div
+        *ngIf="uuid && !errorMessage && !isLoading"
+        class="mb-6 flex flex-col items-center gap-3 transition-all duration-700 ease-in-out opacity-100 text-center text__color"
+      >
+        <p class="text-xl font-semibold bg-gray-100 rounded px-4 py-2">
+          UUID: <span class="font-bold">{{ uuid }}</span>
+        </p>
+        <button (click)="copyToClipboard()" class="button px-4 py-2 rounded">
+          Copy
+        </button>
+      </div>
+      <div
+        *ngIf="!uuid && !errorMessage && !isLoading"
+        class="text-center mb-6 text-lg font-medium text-gray-600"
+      >
+        <p>⏳ Click below to generate a UUID!</p>
+      </div>
+      <div class="mb-6 text__color"></div>
+      <button
+        (click)="generateUuid()"
+        class="w-full text-lg font-semibold px-6 button py-3 rounded button transition"
+      >
+        Generate UUID
+      </button>
+      <div *ngIf="errorMessage" class="text-red-500 mt-4 text-center">
+        <p>🚫 {{ errorMessage }}</p>
+      </div>
+    </div>
+    <div class="w-full lg:w-1/2 p-6 border shadow-md rounded-lg text__color">
+      <h3 class="text-2xl font-semibold mb-4 title__color">📚 About UUIDs</h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li>UUID stands for Universally Unique Identifier.</li>
+        <li>
+          Version 4 UUIDs are randomly generated and highly unlikely to collide.
+        </li>
+        <li>
+          Commonly used for unique keys in databases, distributed systems, and
+          more.
+        </li>
+        <li>
+          Format: 8-4-4-4-12 hexadecimal digits (e.g.,
+          xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx)
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div
+    *ngIf="uuid && !errorMessage && !isLoading"
+    class="w-full shadow-md rounded-lg p-6 border"
+  >
+    <h4 class="text-2xl font-bold mb-4 text-center title__color">
+      📖 How UUIDs are Generated
+    </h4>
+    <p class="text-base text-gray-700 mb-4">
+      A version 4 UUID is generated using random numbers, following the RFC4122
+      standard.
+    </p>
+    <ul class="list-inside list-decimal pl-6 text-gray-700 mb-4">
+      <li *ngFor="let step of breakdown">{{ step }}</li>
+    </ul>
+  </div>
+</div>

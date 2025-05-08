@@ -1,0 +1,93 @@
+<div class="container mx-auto lg:p-4 p-0 flex flex-col justify-center gap-8">
+  <div class="p-4 flex flex-col justify-center lg:flex-row gap-8">
+    <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 border">
+      <h2
+        class="text-3xl font-bold mb-6 text-center"
+        [style.color]="'var(--font-color)'"
+      >
+        <!-- Calculator Title -->Leap Year Checker
+      </h2>
+      <div
+        *ngIf="result && !errorMessage && !isLoading"
+        class="mb-6 flex flex-col items-center gap-3 transition-all duration-700 ease-in-out opacity-100 text-center text__color"
+      >
+        <p class="text-xl font-semibold bg-gray-100 rounded px-4 py-2">
+          {{ result }}
+        </p>
+      </div>
+      <div *ngIf="isLoading" class="mb-6 flex justify-center">
+        <svg
+          class="animate-spin h-8 w-8 text-gray-500"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+          ></path>
+        </svg>
+      </div>
+      <div
+        *ngIf="!result && !errorMessage && !isLoading"
+        class="text-center mb-6 text-lg font-medium text-gray-600"
+      >
+        <p>⏳ Enter a year to check if it's a leap year!</p>
+      </div>
+      <div class="mb-6 text__color">
+        <label class="block text-lg font-medium mb-2">Year:</label>
+        <input
+          type="number"
+          [(ngModel)]="year"
+          class="border border-gray-300 p-3 rounded w-full text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder="Enter year (e.g. 2024)"
+        />
+      </div>
+      <button
+        (click)="checkLeapYear()"
+        class="w-full text-lg font-semibold px-6 button py-3 rounded button transition"
+      >
+        Check Leap Year
+      </button>
+      <div *ngIf="errorMessage" class="text-red-500 mt-4 text-center">
+        <p>🚫 {{ errorMessage }}</p>
+      </div>
+    </div>
+    <div class="w-full lg:w-1/2 p-6 border shadow-md rounded-lg text__color">
+      <h3 class="text-2xl font-semibold mb-4 title__color">
+        📚 Leap Year Logic
+      </h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li>A year is a leap year if it is divisible by 4.</li>
+        <li>
+          But if it is divisible by 100, it must also be divisible by 400.
+        </li>
+        <li>Leap years have 366 days; non-leap years have 365 days.</li>
+        <li>Leap years keep our calendar in sync with the Earth's orbit.</li>
+      </ul>
+    </div>
+  </div>
+  <div
+    *ngIf="result && !errorMessage && !isLoading"
+    class="w-full shadow-md rounded-lg p-6 border"
+  >
+    <h4 class="text-2xl font-bold mb-4 text-center title__color">
+      📖 How Leap Year is Determined
+    </h4>
+    <p class="text-base text-gray-700 mb-4">
+      A leap year is determined by these rules:
+    </p>
+    <ul class="list-inside list-decimal pl-6 text-gray-700 mb-4">
+      <li *ngFor="let step of breakdown">{{ step }}</li>
+    </ul>
+  </div>
+</div>
