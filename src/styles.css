@@ -59,7 +59,7 @@ html {
 }
 
 .button:hover {
-  background-color: color-mix(in srgb, var(--text-color) 30%, #fff);
+  background-color: color-mix(in srgb, var(--text-color) 80%, #000000);
 }
 .title__color {
   color: var(--text-color);
@@ -79,4 +79,9 @@ html {
 .border__color {
   border-color: var(--border-color);
 }
+.custom_container {
+  background-color: color-mix(in srgb, var(--text-color) 10%, #fff);
+  border: 2px solid var(--text-color);
+}
+
 /*=============== Common STYLES ===============*/
