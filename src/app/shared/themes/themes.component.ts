@@ -136,7 +136,8 @@ export class ThemesComponent implements OnInit {
       if (this.isCustomThemeEnabled && this.activeCustomThemeIndex >= 0) {
         this.applyTheme(
           this.customThemes[this.activeCustomThemeIndex].colors,
-          this.activeCustomThemeIndex
+          this.activeCustomThemeIndex,
+          true // Indicate this is a custom theme
         );
       }
     }
