@@ -10,6 +10,11 @@ import { HoursBetweenComponent } from './features/hours-between/hours-between.co
 import { PasswordGeneratorComponent } from './features/password-generator/password-generator.component';
 import { BMICalculatorComponent } from './features/bmi-calculator/bmi-calculator.component';
 import { SimpleInterestComponent } from './features/simple-interest/simple-interest.component';
+import { CompoundInterestComponent } from './features/compound-interest/compound-interest.component';
+import { LoanEmiCalculatorComponent } from './features/loan-emi-calculator/loan-emi-calculator.component';
+import { PercentageCalculatorComponent } from './features/percentage-calculator/percentage-calculator.component';
+import { NumberBaseConverterComponent } from './features/number-base-converter/number-base-converter.component';
+
 export const routes: Routes = [
   { path: '', component: HomeComponent }, // Updated to use HomeComponent
   { path: 'calculate-age', component: CalculateAgeComponent },
@@ -21,4 +26,8 @@ export const routes: Routes = [
   { path: 'password-generator', component: PasswordGeneratorComponent },
   { path: 'bmi-calculator', component: BMICalculatorComponent },
   { path: 'simple-interest', component: SimpleInterestComponent },
+  { path: 'compound-interest', component: CompoundInterestComponent },
+  { path: 'loan-emi-calculator', component: LoanEmiCalculatorComponent },
+  { path: 'percentage-calculator', component: PercentageCalculatorComponent },
+  { path: 'number-base-converter', component: NumberBaseConverterComponent },
 ];

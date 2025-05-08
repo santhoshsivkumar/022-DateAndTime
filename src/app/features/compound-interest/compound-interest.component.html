@@ -1,0 +1,93 @@
+<div class="container mx-auto lg:p-4 p-0 flex flex-col justify-center gap-8">
+  <div class="p-4 flex flex-col justify-center lg:flex-row gap-8">
+    <div class="w-full lg:w-1/2 shadow-md rounded-lg p-6 border">
+      <h2
+        class="text-3xl font-bold mb-6 text-center"
+        [style.color]="'var(--font-color)'"
+      >
+        💰 Compound Interest Calculator
+      </h2>
+
+      <div
+        *ngIf="compoundInterestResult"
+        class="mb-6 flex flex-col items-center gap-3 text-center"
+      >
+        <p class="text-xl font-semibold bg-gray-100 rounded px-4 py-2">
+          🎉 Interest:
+          <span class="font-bold">{{ compoundInterestResult.interest }}</span>
+        </p>
+        <p class="text-lg">
+          📆 Total Amount: {{ compoundInterestResult.totalAmount }}
+        </p>
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-lg font-medium mb-2"
+          >💵 Principal Amount:</label
+        >
+        <input
+          type="number"
+          [(ngModel)]="principalAmount"
+          class="border p-3 rounded w-full text-lg"
+          placeholder="Enter principal amount"
+        />
+
+        <label class="block text-lg font-medium mb-2 mt-4"
+          >📆 Time (Years):</label
+        >
+        <input
+          type="number"
+          [(ngModel)]="time"
+          class="border p-3 rounded w-full text-lg"
+          placeholder="Enter time period"
+        />
+
+        <label class="block text-lg font-medium mb-2 mt-4"
+          >💹 Rate of Interest:</label
+        >
+        <input
+          type="number"
+          [(ngModel)]="rateOfInterest"
+          class="border p-3 rounded w-full text-lg"
+          placeholder="Enter rate of interest"
+        />
+
+        <label class="block text-lg font-medium mb-2 mt-4"
+          >🔄 Compounding Frequency:</label
+        >
+        <select
+          [(ngModel)]="compoundFrequency"
+          class="border p-3 rounded w-full text-lg"
+        >
+          <option value="1">Yearly</option>
+          <option value="4">Quarterly</option>
+          <option value="12">Monthly</option>
+          <option value="365">Daily</option>
+        </select>
+      </div>
+
+      <button
+        (click)="calculateCompoundInterest()"
+        class="w-full text-lg font-semibold px-6 py-3 rounded button"
+      >
+        🧮 Calculate Compound Interest
+      </button>
+    </div>
+
+    <div class="w-full lg:w-1/2 p-6 border shadow-md rounded-lg text__color">
+      <h3 class="text-2xl font-semibold mb-4 title__color">
+        📚 Key Facts About Compound Interest
+      </h3>
+      <ul class="list-disc list-inside space-y-2">
+        <li>
+          Compound Interest is calculated on the principal and the accumulated
+          interest.
+        </li>
+        <li>It grows faster than simple interest due to compounding.</li>
+        <li>
+          Formula: <strong>P(1 + r/n)<sup>nt</sup></strong>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
